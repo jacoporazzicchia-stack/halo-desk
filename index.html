@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#08080b">
+
+<title>Halo Desk</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #08080b;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    padding: 35px 22px 30px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #77777f;
+    font-size: 14px;
+}
+
+.timer-card {
+    background: #111116;
+    border: 1px solid #24242c;
+    border-radius: 30px;
+    padding: 38px 20px 28px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+.timer {
+    font-size: 68px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -3px;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 25px;
+}
+
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.timer-button {
+    border: none;
+    border-radius: 15px;
+    padding: 13px 20px;
+    color: white;
+    background: #222229;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.timer-button:active {
+    transform: scale(0.96);
+}
+
+.status-card {
+    margin-top: 18px;
+    background: #111116;
+    border: 1px solid #24242c;
+    border-radius: 25px;
+    padding: 22px;
+    text-align: center;
+}
+
+.status-light {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #25252b;
+    margin: 0 auto 15px;
+    transition: 0.3s ease;
+}
+
+.status-name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.status-description {
+    margin-top: 5px;
+    color: #77777f;
+    font-size: 14px;
+}
+
+.controls {
+    margin-top: 18px;
+    display: grid;
+    gap: 10px;
+}
+
+.control-button {
+    width: 100%;
+    border: none;
+    border-radius: 18px;
+    padding: 18px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.green {
+    background: #12351f;
+}
+
+.blue {
+    background: #12283d;
+}
+
+.red {
+    background: #3b1515;
+}
+
+.off {
+    background: #202025;
+}
+
+.control-button:active {
+    transform: scale(0.98);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #55555d;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="logo">Halo Desk</div>
+        <div class="subtitle">Il tuo spazio di lavoro</div>
+    </div>
+
+    <div class="timer-card">
+
+        <div id="timer" class="timer">
+            00:00:00
+        </div>
+
+        <div class="timer-buttons">
+
+            <button class="timer-button" onclick="startTimer()">
+                ▶ Avvia
+            </button>
+
+            <button class="timer-button" onclick="pauseTimer()">
+                ⏸ Pausa
+            </button>
+
+            <button class="timer-button" onclick="resetTimer()">
+                ↺ Reset
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="status-card">
+
+        <div id="statusLight" class="status-light"></div>
+
+        <div id="statusName" class="status-name">
+            Spento
+        </div>
+
+        <div id="statusDescription" class="status-description">
+            La bandierina è spenta
+        </div>
+
+    </div>
+
+    <div class="controls">
+
+        <button class="control-button green"
+                onclick="setStatus('green')">
+            🟢 Disponibile
+        </button>
+
+        <button class="control-button blue"
+                onclick="setStatus('blue')">
+            🔵 Solo importanti
+        </button>
+
+        <button class="control-button red"
+                onclick="setStatus('red')">
+            🔴 Non disturbare
+        </button>
+
+        <button class="control-button off"
+                onclick="setStatus('off')">
+            ⚫ Spegni
+        </button>
+
+    </div>
+
+    <div class="footer">
+        Halo Desk • Controllo dispositivo
+    </div>
+
+</div>
+
+<script>
+
+let timerInterval = null;
+let elapsedSeconds = 0;
+let running = false;
+
+function updateTimer() {
+
+    let hours = Math.floor(elapsedSeconds / 3600);
+
+    let minutes = Math.floor(
+        (elapsedSeconds % 3600) / 60
+    );
+
+    let seconds = elapsedSeconds % 60;
+
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+
+    document.getElementById("timer").textContent =
+        hours + ":" + minutes + ":" + seconds;
+}
+
+function startTimer() {
+
+    if (running) return;
+
+    running = true;
+
+    timerInterval = setInterval(function() {
+
+        elapsedSeconds++;
+
+        updateTimer();
+
+    }, 1000);
+}
+
+function pauseTimer() {
+
+    running = false;
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+}
+
+function resetTimer() {
+
+    pauseTimer();
+
+    elapsedSeconds = 0;
+
+    updateTimer();
+}
+
+function setStatus(color) {
+
+    const light =
+        document.getElementById("statusLight");
+
+    const name =
+        document.getElementById("statusName");
+
+    const description =
+        document.getElementById("statusDescription");
+
+    if (color === "green") {
+
+        light.style.background = "#22c55e";
+        light.style.boxShadow =
+            "0 0 45px #22c55e";
+
+        name.textContent = "Disponibile";
+        description.textContent =
+            "Puoi parlare con me";
+    }
+
+    if (color === "blue") {
+
+        light.style.background = "#3b82f6";
+        light.style.boxShadow =
+            "0 0 45px #3b82f6";
+
+        name.textContent = "Solo importanti";
+        description.textContent =
+            "Interrompimi solo se necessario";
+    }
+
+    if (color === "red") {
+
+        light.style.background = "#ef4444";
+        light.style.boxShadow =
+            "0 0 45px #ef4444";
+
+        name.textContent = "Non disturbare";
+        description.textContent =
+            "Sono occupato";
+    }
+
+    if (color === "off") {
+
+        light.style.background = "#25252b";
+        light.style.boxShadow =
+            "0 0 15px rgba(255,255,255,0.03)";
+
+        name.textContent = "Spento";
+        description.textContent =
+            "La bandierina è spenta";
+    }
+}
+
+updateTimer();
+setStatus("off");
+
+</script>
+
+</body>
+</html>
