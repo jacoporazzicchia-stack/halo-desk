@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Halo Desk</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background: #F5F7FA;
+    color: #101828;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+    padding-bottom: 90px;
+}
+
+body.dark {
+    background: #071A33;
+    color: white;
+}
+
+
+/* APP */
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+}
+
+
+/* HEADER */
+
+.header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.add {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #0057B0;
+    color: white;
+    font-size: 27px;
+}
+
+
+/* PAGES */
+
+.page {
+    display: none;
+    padding: 10px 20px 30px;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* =====================
+   HOME
+===================== */
+
+.home {
+    text-align: center;
+}
+
+
+/* CERCHIO */
+
+.timer-ring {
+    width: 280px;
+    height: 280px;
+
+    margin: 30px auto 25px;
+
+    border-radius: 50%;
+
+    border: 3px solid #19C875;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    box-shadow:
+        0 0 15px #19C875,
+        0 0 40px #19C875,
+        0 0 80px rgba(25,200,117,0.35);
+
+    transition: 0.5s;
+}
+
+
+/* AURA */
+
+.timer-ring:before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(25,200,117,0.35);
+
+}
+
+
+/* CENTRO */
+
+.timer-center {
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+body.dark .timer-center {
+    background: #0D2747;
+}
+
+
+.timer-label {
+
+    font-size: 11px;
+
+    color: #7C8490;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.timer {
+
+    font-size: 45px;
+
+    font-weight: 800;
+
+    letter-spacing: -3px;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+
+.status {
+
+    margin-top: 12px;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background: #F0F3F7;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+body.dark .status {
+    background: #173858;
+}
+
+
+/* BOTTONI STATO */
+
+.states {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 9px;
+
+    margin-top: 15px;
+
+}
+
+.state {
+
+    border: none;
+
+    border-radius: 40px;
+
+    padding: 15px 5px;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+}
+
+.green {
+    background: #19C875;
+}
+
+.red {
+    background: #F04444;
+}
+
+.blue {
+    background: #3578E5;
+}
+
+
+/* CARD */
+
+.card {
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 20px;
+
+    margin-top: 18px;
+
+    border: 1px solid #E6EAF0;
+
+}
+
+body.dark .card {
+    background: #0D2747;
+    border-color: #173858;
+}
+
+
+.card-title {
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+.muted {
+
+    color: #7C8490;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =====================
+   TITOLI
+===================== */
+
+.title {
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    margin-top: 10px;
+
+}
+
+.subtitle {
+
+    color: #7C8490;
+
+    margin: 5px 0 22px;
+
+}
+
+
+/* =====================
+   STATISTICHE
+===================== */
+
+.tabs {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 5px;
+
+    padding: 5px;
+
+    background: #E9EDF2;
+
+    border-radius: 20px;
+
+}
+
+body.dark .tabs {
+    background: #0D2747;
+}
+
+
+.tab {
+
+    border: none;
+
+    background: transparent;
+
+    padding: 12px 3px;
+
+    border-radius: 16px;
+
+    font-weight: 700;
+
+}
+
+.tab.active {
+
+    background: #0057B0;
+
+    color: white;
+
+}
+
+
+.total {
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    margin-top: 8px;
+
+}
+
+
+.stat {
+
+    margin-top: 22px;
+
+}
+
+.stat-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.bar {
+
+    height: 9px;
+
+    background: #E8ECF1;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+.fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 20px;
+
+    transition: width .5s;
+
+}
+
+.fill.green {
+    background: #19C875;
+}
+
+.fill.red {
+    background: #F04444;
+}
+
+.fill.blue {
+    background: #3578E5;
+}
+
+
+/* =====================
+   STUDIO
+===================== */
+
+.study-timer {
+
+    text-align: center;
+
+    font-size: 60px;
+
+    font-weight: 800;
+
+    margin: 25px 0;
+
+}
+
+.main-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 17px;
+
+    background: #0057B0;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+.study-buttons {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 8px;
+
+    margin-top: 10px;
+
+}
+
+.study-buttons button {
+
+    border: none;
+
+    border-radius: 17px;
+
+    padding: 14px 3px;
+
+    background: #EEF1F5;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================
+   LISTE
+===================== */
+
+.item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid #E6EAF0;
+
+}
+
+body.dark .item {
+    border-color: #173858;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+.icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 14px;
+
+    background: #F0F3F7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+body.dark .icon {
+    background: #173858;
+}
+
+.arrow {
+
+    font-size: 23px;
+
+    color: #7C8490;
+
+}
+
+
+/* =====================
+   NAV
+===================== */
+
+.nav {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+
+    max-width: 520px;
+
+    height: 72px;
+
+    background: white;
+
+    border-top: 1px solid #E6EAF0;
+
+    display: grid;
+
+    grid-template-columns: repeat(5,1fr);
+
+    z-index: 20;
+
+}
+
+body.dark .nav {
+    background: #0D2747;
+    border-color: #173858;
+}
+
+
+.nav button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #7C8490;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+.nav button.active {
+
+    color: #0057B0;
+
+}
+
+.nav-icon {
+
+    display: block;
+
+    font-size: 20px;
+
+    margin-bottom: 3px;
+
+}
+
+
+/* =====================
+   MODALE
+===================== */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    z-index: 100;
+
+    align-items: flex-end;
+
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 30px 30px 0 0;
+
+}
+
+body.dark .modal-box {
+    background: #0D2747;
+}
+
+.input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    border: 1px solid #DCE2E9;
+
+    margin-bottom: 10px;
+
+    font-size: 16px;
+
+}
+
+.modal-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 16px;
+
+    background: #0057B0;
+
+    color: white;
+
+    font-weight: 800;
+
+    margin-top: 5px;
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="header">
+
+    <div class="logo">
+        Halo Desk
+    </div>
+
+    <button class="add"
+            onclick="openDevice()">
+        +
+    </button>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active home">
+
+    <div id="timerRing"
+         class="timer-ring">
+
+        <div class="timer-center">
+
+            <div class="timer-label">
+                STATO ATTUALE
+            </div>
+
+            <div id="mainTimer"
+                 class="timer">
+                00:00:00
+            </div>
+
+            <div id="status"
+                 class="status">
+                🟢 Libero
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="states">
+
+        <button class="state green"
+                onclick="changeState('Libero')">
+            Libero
+        </button>
+
+        <button class="state red"
+                onclick="changeState('Occupato')">
+            Occupato
+        </button>
+
+        <button class="state blue"
+                onclick="changeState('Focus')">
+            Focus
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Sessione corrente
+        </div>
+
+        <div id="sessionText"
+             class="muted">
+            Libero
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATISTICHE -->
+
+<section id="stats"
+         class="page">
+
+    <div class="title">
+        Statistiche
+    </div>
+
+    <div class="subtitle">
+        Analizza il tuo tempo.
+    </div>
+
+
+    <div class="tabs">
+
+        <button id="dayTab"
+                class="tab active"
+                onclick="setPeriod('day')">
+            Giorno
+        </button>
+
+        <button id="weekTab"
+                class="tab"
+                onclick="setPeriod('week')">
+            Settimana
+        </button>
+
+        <button id="monthTab"
+                class="tab"
+                onclick="setPeriod('month')">
+            Mese
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Tempo totale
+        </div>
+
+        <div id="total"
+             class="total">
+            0 min
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-head">
+                <span>🟢 Libero</span>
+                <span id="free">0 min</span>
+            </div>
+
+            <div class="bar">
+                <div id="freeBar"
+                     class="fill green">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-head">
+                <span>🔴 Occupato</span>
+                <span id="busy">0 min</span>
+            </div>
+
+            <div class="bar">
+                <div id="busyBar"
+                     class="fill red">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-head">
+                <span>🔵 Focus</span>
+                <span id="focus">0 min</span>
+            </div>
+
+            <div class="bar">
+                <div id="focusBar"
+                     class="fill blue">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="periodCard"
+         class="card">
+
+        <div class="card-title">
+            Oggi
+        </div>
+
+        <div class="muted">
+            I dati delle tue sessioni compariranno qui.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDIO -->
+
+<section id="study"
+         class="page">
+
+    <div class="title">
+        Studio
+    </div>
+
+    <div class="subtitle">
+        Focus separato dal dispositivo.
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Pomodoro
+        </div>
+
+        <div class="muted">
+            25 minuti studio · 5 minuti pausa
+        </div>
+
+        <button class="main-button"
+                onclick="pomodoro()">
+            Avvia Pomodoro
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div id="studyTimer"
+             class="study-timer">
+            25:00
+        </div>
+
+        <div class="study-buttons">
+
+            <button onclick="startStudy()">
+                ▶ Avvia
+            </button>
+
+            <button onclick="pauseStudy()">
+                ⏸ Pausa
+            </button>
+
+            <button onclick="resetStudy()">
+                ↺ Reset
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TEAM -->
+
+<section id="team"
+         class="page">
+
+    <div class="title">
+        Team
+    </div>
+
+    <div class="subtitle">
+        Gestisci più Halo Desk.
+    </div>
+
+
+    <div class="card">
+
+        <div class="item"
+             onclick="teamFeature('partecipanti')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    👥
+                </div>
+
+                <div>
+                    <b>Partecipanti</b>
+                    <div class="muted">
+                        Aggiungi persone
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div class="item"
+             onclick="teamFeature('turni')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    ⏱
+                </div>
+
+                <div>
+                    <b>Turni</b>
+                    <div class="muted">
+                        Tempo di parola
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ALTRO -->
+
+<section id="more"
+         class="page">
+
+    <div class="title">
+        Altro
+    </div>
+
+    <div class="subtitle">
+        Strumenti e impostazioni.
+    </div>
+
+
+    <div class="card">
+
+
+        <div class="item"
+             onclick="openFeature('Automazioni')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    ⚡
+                </div>
+
+                <div>
+                    <b>Automazioni</b>
+
+                    <div class="muted">
+                        Routine automatiche
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">›</div>
+
+        </div>
+
+
+        <div class="item"
+             onclick="openFeature('Calendario')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    📅
+                </div>
+
+                <div>
+                    <b>Calendario</b>
+
+                    <div class="muted">
+                        Riunioni e appuntamenti
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">›</div>
+
+        </div>
+
+
+        <div class="item"
+             onclick="openFeature('Notifiche')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    🔔
+                </div>
+
+                <div>
+                    <b>Notifiche</b>
+
+                    <div class="muted">
+                        Timer e cambi di stato
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">›</div>
+
+        </div>
+
+
+        <div class="item"
+             onclick="openFeature('Personalizzazione')">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    ✨
+                </div>
+
+                <div>
+                    <b>Personalizzazione</b>
+
+                    <div class="muted">
+                        LED e luminosità
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">›</div>
+
+        </div>
+
+
+        <div class="item"
+             onclick="toggleDark()">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    🌙
+                </div>
+
+                <div>
+                    <b>Modalità Dark</b>
+
+                    <div class="muted">
+                        Blu notte
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAV -->
+
+<nav class="nav">
+
+    <button class="active"
+            onclick="page('home',this)">
+
+        <span class="nav-icon">⌂</span>
+        Home
+
+    </button>
+
+
+    <button onclick="page('stats',this)">
+
+        <span class="nav-icon">▥</span>
+        Statistiche
+
+    </button>
+
+
+    <button onclick="page('study',this)">
+
+        <span class="nav-icon">◷</span>
+        Studio
+
+    </button>
+
+
+    <button onclick="page('team',this)">
+
+        <span class="nav-icon">♧</span>
+        Team
+
+    </button>
+
+
+    <button onclick="page('more',this)">
+
+        <span class="nav-icon">•••</span>
+        Altro
+
+    </button>
+
+</nav>
+
+
+</div>
+
+
+<!-- MODALE -->
+
+<div id="modal"
+     class="modal">
+
+    <div class="modal-box">
+
+        <h2>
+            Aggiungi Halo Desk
+        </h2>
+
+        <input id="deviceName"
+               class="input"
+               placeholder="Nome dispositivo">
+
+        <input id="deviceCode"
+               class="input"
+               placeholder="Codice dispositivo">
+
+        <button class="modal-button"
+                onclick="saveDevice()">
+            Aggiungi
+        </button>
+
+        <button class="modal-button"
+                onclick="closeDevice()"
+                style="background:#E9EDF2;color:#111;">
+            Annulla
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   STATO
+========================= */
+
+var state =
+    localStorage.getItem("haloState") || "Libero";
+
+var sessions =
+    JSON.parse(
+        localStorage.getItem("haloSessions") || "[]"
+    );
+
+var startTime =
+    Number(
+        localStorage.getItem("haloStart")
+    ) || Date.now();
+
+
+/* =========================
+   TIMER
+========================= */
+
+function format(seconds) {
+
+    var h =
+        Math.floor(seconds / 3600);
+
+    var m =
+        Math.floor((seconds % 3600) / 60);
+
+    var s =
+        seconds % 60;
+
+    return (
+        String(h).padStart(2,"0") +
+        ":" +
+        String(m).padStart(2,"0") +
+        ":" +
+        String(s).padStart(2,"0")
+    );
+
+}
+
+
+function timerUpdate() {
+
+    var seconds =
+        Math.floor(
+            (Date.now() - startTime) / 1000
+        );
+
+    document.getElementById("mainTimer")
+        .innerHTML =
+        format(seconds);
+
+}
+
+
+setInterval(timerUpdate,1000);
+
+
+/* =========================
+   COLORE CERCHIO
+========================= */
+
+function updateColor() {
+
+    var ring =
+        document.getElementById("timerRing");
+
+    var status =
+        document.getElementById("status");
+
+
+    if (state === "Libero") {
+
+        ring.style.borderColor =
+            "#19C875";
+
+        ring.style.boxShadow =
+            "0 0 15px #19C875, 0 0 40px #19C875, 0 0 80px rgba(25,200,117,.35)";
+
+        status.innerHTML =
+            "🟢 Libero";
+
+    }
+
+
+    if (state === "Occupato") {
+
+        ring.style.borderColor =
+            "#F04444";
+
+        ring.style.boxShadow =
+            "0 0 15px #F04444, 0 0 40px #F04444, 0 0 80px rgba(240,68,68,.35)";
+
+        status.innerHTML =
+            "🔴 Occupato";
+
+    }
+
+
+    if (state === "Focus") {
+
+        ring.style.borderColor =
+            "#3578E5";
+
+        ring.style.boxShadow =
+            "0 0 15px #3578E5, 0 0 40px #3578E5, 0 0 80px rgba(53,120,229,.40)";
+
+        status.innerHTML =
+            "🔵 Focus";
+
+    }
+
+
+    document.getElementById("sessionText")
+        .innerHTML =
+        "Stato attivo: <b>" +
+        state +
+        "</b>";
+
+}
+
+
+updateColor();
+
+
+/* =========================
+   CAMBIO STATO
+========================= */
+
+function changeState(newState) {
+
+    if (newState === state) return;
+
+
+    var now = Date.now();
+
+
+    sessions.push({
+
+        state: state,
+
+        start: startTime,
+
+        end: now,
+
+        duration:
+            Math.floor(
+                (now-startTime)/1000
+            )
+
+    });
+
+
+    state = newState;
+
+    startTime = now;
+
+
+    localStorage.setItem(
+        "haloState",
+        state
+    );
+
+    localStorage.setItem(
+        "haloStart",
+        startTime
+    );
+
+    localStorage.setItem(
+        "haloSessions",
+        JSON.stringify(sessions)
+    );
+
+
+    updateColor();
+
+    updateStats();
+
+}
+
+
+/* =========================
+   NAVIGAZIONE
+========================= */
+
+function page(id,button) {
+
+    var pages =
+        document.querySelectorAll(".page");
+
+    for (var i=0;i<pages.length;i++) {
+
+        pages[i].classList.remove("active");
+
+    }
+
+
+    document.getElementById(id)
+        .classList.add("active");
+
+
+    var buttons =
+        document.querySelectorAll(".nav button");
+
+    for (var j=0;j<buttons.length;j++) {
+
+        buttons[j].classList.remove("active");
+
+    }
+
+
+    button.classList.add("active");
+
+
+    if (id === "stats") {
+
+        updateStats();
+
+    }
+
+}
+
+
+/* =========================
+   STATISTICHE
+========================= */
+
+var period = "day";
+
+
+function setPeriod(p) {
+
+    period = p;
+
+
+    var tabs =
+        document.querySelectorAll(".tab");
+
+    for (var i=0;i<tabs.length;i++) {
+
+        tabs[i].classList.remove("active");
+
+    }
+
+
+    if (p === "day") {
+
+        document.getElementById("dayTab")
+            .classList.add("active");
+
+    }
+
+
+    if (p === "week") {
+
+        document.getElementById("weekTab")
+            .classList.add("active");
+
+    }
+
+
+    if (p === "month") {
+
+        document.getElementById("monthTab")
+            .classList.add("active");
+
+    }
+
+
+    updateStats();
+
+}
+
+
+function getStats() {
+
+    var data = {
+
+        Libero:0,
+        Occupato:0,
+        Focus:0
+
+    };
+
+
+    for (var i=0;i<sessions.length;i++) {
+
+        data[sessions[i].state] +=
+            sessions[i].duration;
+
+    }
+
+
+    data[state] +=
+        Math.floor(
+            (Date.now()-startTime)/1000
+        );
+
+
+    return data;
+
+}
+
+
+function updateStats() {
+
+    var data = getStats();
+
+
+    var total =
+        data.Libero +
+        data.Occupato +
+        data.Focus;
+
+
+    document.getElementById("total")
+        .innerHTML =
+        Math.floor(total/60) + " min";
+
+
+    document.getElementById("free")
+        .innerHTML =
+        Math.floor(data.Libero/60) + " min";
+
+
+    document.getElementById("busy")
+        .innerHTML =
+        Math.floor(data.Occupato/60) + " min";
+
+
+    document.getElementById("focus")
+        .innerHTML =
+        Math.floor(data.Focus/60) + " min";
+
+
+    if (total > 0) {
+
+        document.getElementById("freeBar")
+            .style.width =
+            (data.Libero/total*100)+"%";
+
+
+        document.getElementById("busyBar")
+            .style.width =
+            (data.Occupato/total*100)+"%";
+
+
+        document.getElementById("focusBar")
+            .style.width =
+            (data.Focus/total*100)+"%";
+
+    }
+
+
+    var title = "Oggi";
+
+    if (period === "week") {
+
+        title = "Questa settimana";
+
+    }
+
+    if (period === "month") {
+
+        title = "Questo mese";
+
+    }
+
+
+    document.getElementById("periodCard")
+        .innerHTML =
+
+        "<div class='card-title'>" +
+        title +
+        "</div>" +
+
+        "<div class='muted' style='margin-top:10px'>" +
+
+        "🟢 Libero: " +
+        Math.floor(data.Libero/60) +
+        " min<br><br>" +
+
+        "🔴 Occupato: " +
+        Math.floor(data.Occupato/60) +
+        " min<br><br>" +
+
+        "🔵 Focus: " +
+        Math.floor(data.Focus/60) +
+        " min" +
+
+        "</div>";
+
+}
+
+
+updateStats();
+
+
+/* =========================
+   STUDIO
+========================= */
+
+var studySeconds = 1500;
+
+var studyInterval = null;
+
+
+function updateStudy() {
+
+    var m =
+        Math.floor(studySeconds/60);
+
+    var s =
+        studySeconds%60;
+
+
+    document.getElementById("studyTimer")
+        .innerHTML =
+        String(m).padStart(2,"0") +
+        ":" +
+        String(s).padStart(2,"0");
+
+}
+
+
+function startStudy() {
+
+    if (studyInterval) return;
+
+
+    studyInterval =
+        setInterval(function() {
+
+            if (studySeconds > 0) {
+
+                studySeconds--;
+
+                updateStudy();
+
+            } else {
+
+                pauseStudy();
+
+                alert(
+                    "Sessione terminata!"
+                );
+
+            }
+
+        },1000);
+
+}
+
+
+function pauseStudy() {
+
+    clearInterval(studyInterval);
+
+    studyInterval = null;
+
+}
+
+
+function resetStudy() {
+
+    pauseStudy();
+
+    studySeconds = 1500;
+
+    updateStudy();
+
+}
+
+
+function pomodoro() {
+
+    resetStudy();
+
+    startStudy();
+
+}
+
+
+updateStudy();
+
+
+/* =========================
+   DARK
+========================= */
+
+function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "haloDark",
+        document.body.classList.contains("dark")
+    );
+
+}
+
+
+if (
+    localStorage.getItem("haloDark")
+    === "true"
+) {
+
+    document.body.classList.add("dark");
+
+}
+
+
+/* =========================
+   ALTRE FUNZIONI
+========================= */
+
+function openFeature(name) {
+
+    alert(
+        name +
+        "\n\nQuesta sezione è pronta per essere sviluppata."
+    );
+
+}
+
+
+function teamFeature(name) {
+
+    alert(
+        "Team: " +
+        name +
+        "\n\nQuesta funzione verrà collegata ai dispositivi Halo Desk."
+    );
+
+}
+
+
+/* =========================
+   DISPOSITIVO
+========================= */
+
+function openDevice() {
+
+    document.getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeDevice() {
+
+    document.getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+function saveDevice() {
+
+    var name =
+        document.getElementById("deviceName")
+        .value;
+
+
+    if (!name) {
+
+        name = "Halo Desk";
+
+    }
+
+
+    localStorage.setItem(
+        "haloDevice",
+        name
+    );
+
+
+    closeDevice();
+
+
+    alert(
+        name + " aggiunto!"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
