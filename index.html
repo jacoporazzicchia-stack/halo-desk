@@ -1890,32 +1890,37 @@ function closeDevice() {
 
 }
 
-
 function saveDevice() {
 
     var name =
         document.getElementById("deviceName")
         .value;
 
-
     if (!name) {
-
         name = "Halo Desk";
-
     }
-
 
     localStorage.setItem(
         "haloDevice",
         name
     );
 
-
     closeDevice();
-
 
     alert(
         name + " aggiunto!"
+    );
+
+}
+
+
+/* AUTOMAZIONI */
+
+function createAutomation() {
+
+    alert(
+        "Nuova automazione\n\n" +
+        "Qui aggiungeremo la scelta di giorno, ora e stato di Halo Desk."
     );
 
 }
