@@ -1792,13 +1792,43 @@ if (
 /* =========================
    ALTRE FUNZIONI
 ========================= */
-
 function openFeature(name) {
 
-    alert(
-        name +
-        "\n\nQuesta sezione è pronta per essere sviluppata."
-    );
+    if (name === "Automazioni") {
+
+        alert(
+            "AUTOMAZIONI\n\n" +
+            "Qui potremo creare le tue routine automatiche."
+        );
+
+    }
+
+    if (name === "Calendario") {
+
+        alert(
+            "CALENDARIO\n\n" +
+            "Qui collegheremo il calendario e gli eventi."
+        );
+
+    }
+
+    if (name === "Notifiche") {
+
+        alert(
+            "NOTIFICHE\n\n" +
+            "Qui potremo configurare le notifiche di Halo Desk."
+        );
+
+    }
+
+    if (name === "Personalizzazione") {
+
+        alert(
+            "PERSONALIZZAZIONE\n\n" +
+            "Qui potremo modificare colori, luminosità ed effetti LED."
+        );
+
+    }
 
 }
 
