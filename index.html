@@ -1830,12 +1830,34 @@ function openFeature(name) {
 
     if (name === "Automazioni") {
 
-        alert(
-            "AUTOMAZIONI\n\n" +
-            "Qui potremo creare le tue routine automatiche."
-        );
+        document.querySelectorAll(".page").forEach(function(p) {
+            p.classList.remove("active");
+        });
+
+        document.getElementById("automations")
+            .classList.add("active");
 
     }
+
+    if (name === "Calendario") {
+
+        alert("Calendario: prossimamente");
+
+    }
+
+    if (name === "Notifiche") {
+
+        alert("Notifiche: prossimamente");
+
+    }
+
+    if (name === "Personalizzazione") {
+
+        alert("Personalizzazione: prossimamente");
+
+    }
+
+}
 
     if (name === "Calendario") {
 
