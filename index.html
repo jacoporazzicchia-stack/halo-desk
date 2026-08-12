@@ -1079,7 +1079,106 @@ body.dark .modal-box {
         </div>
     </div>
 </section>
+<!-- CREA AUTOMAZIONE -->
 
+<section id="createAutomationPage" class="page">
+
+    <div class="title">
+        Nuova automazione
+    </div>
+
+    <div class="subtitle">
+        Scegli quando e come Halo Desk deve cambiare stato.
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+            Nome
+        </div>
+
+        <input
+            id="automationName"
+            class="input"
+            type="text"
+            placeholder="Es. Riunione mattutina"
+        >
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Orario
+        </div>
+
+        <input
+            id="automationTime"
+            class="input"
+            type="time"
+        >
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Stato Halo Desk
+        </div>
+
+        <div class="states">
+
+            <button
+                id="autoFree"
+                class="state green"
+                onclick="selectAutomationState('Libero')">
+                Libero
+            </button>
+
+            <button
+                id="autoBusy"
+                class="state red"
+                onclick="selectAutomationState('Occupato')">
+                Occupato
+            </button>
+
+            <button
+                id="autoFocus"
+                class="state blue"
+                onclick="selectAutomationState('Focus')">
+                Focus
+            </button>
+
+        </div>
+
+        <div
+            id="selectedAutomationState"
+            class="muted"
+            style="margin-top:15px;">
+            Nessuno stato selezionato
+        </div>
+
+    </div>
+
+
+    <button
+        class="main-button"
+        onclick="saveAutomation()"
+        style="margin-top:18px;">
+        Salva automazione
+    </button>
+
+
+    <button
+        class="main-button"
+        onclick="closeAutomationPage()"
+        style="margin-top:10px;background:#E9EDF2;color:#101828;">
+        Annulla
+    </button>
+
+</section>
 <section id="more"
          class="page">
 
