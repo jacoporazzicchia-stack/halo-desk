@@ -1918,9 +1918,50 @@ function saveDevice() {
 
 function createAutomation() {
 
+    var name = prompt("Nome dell'automazione:");
+
+    if (!name) return;
+
+    var time = prompt("A che ora? (es. 09:00):");
+
+    if (!time) return;
+
+    var status = prompt(
+        "Quale stato vuoi attivare?\n\n" +
+        "Scrivi: Libero, Occupato oppure Focus"
+    );
+
+    if (
+        status !== "Libero" &&
+        status !== "Occupato" &&
+        status !== "Focus"
+    ) {
+        alert("Stato non valido.");
+        return;
+    }
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem("haloAutomations") || "[]"
+        );
+
+    automations.push({
+        name: name,
+        time: time,
+        status: status,
+        active: true
+    });
+
+    localStorage.setItem(
+        "haloAutomations",
+        JSON.stringify(automations)
+    );
+
     alert(
-        "Nuova automazione\n\n" +
-        "Qui aggiungeremo la scelta di giorno, ora e stato di Halo Desk."
+        "Automazione creata!\n\n" +
+        name + "\n" +
+        time + "\n" +
+        status
     );
 
 }
