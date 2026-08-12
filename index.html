@@ -2025,7 +2025,39 @@ function createAutomation() {
         .classList.add("active");
 
 }
+var selectedAutomationState = "";
 
+function selectAutomationState(state) {
+
+    selectedAutomationState = state;
+
+    document.getElementById("autoFree")
+        .classList.remove("selected");
+
+    document.getElementById("autoBusy")
+        .classList.remove("selected");
+
+    document.getElementById("autoFocus")
+        .classList.remove("selected");
+
+    if (state === "Libero") {
+        document.getElementById("autoFree")
+            .classList.add("selected");
+    }
+
+    if (state === "Occupato") {
+        document.getElementById("autoBusy")
+            .classList.add("selected");
+    }
+
+    if (state === "Focus") {
+        document.getElementById("autoFocus")
+            .classList.add("selected");
+    }
+
+    document.getElementById("selectedAutomationState")
+        .textContent = "Stato selezionato: " + state;
+}
 </script>
 
 </body>
