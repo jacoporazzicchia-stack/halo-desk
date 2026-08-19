@@ -1533,6 +1533,10 @@ function format(seconds) {
 
 function timerUpdate() {
 
+    if (!haloDeskOn) {
+        return;
+    }
+
     var seconds =
         Math.floor(
             (Date.now() - startTime) / 1000
@@ -2221,6 +2225,12 @@ function toggleHaloDesk() {
     var ring =
         document.getElementById("timerRing");
 
+    var timerLabel =
+        document.querySelector(".timer-label");
+
+    var status =
+        document.getElementById("status");
+
 
     if (haloDeskOn) {
 
@@ -2229,6 +2239,14 @@ function toggleHaloDesk() {
 
         ring.classList.remove("desk-off");
 
+        timerLabel.textContent = "STATO ATTUALE";
+
+        status.textContent = "🟢 Libero";
+
+        startTime = Date.now();
+
+        timerUpdate();
+
     } else {
 
         button.classList.remove("on");
@@ -2236,10 +2254,13 @@ function toggleHaloDesk() {
 
         ring.classList.add("desk-off");
 
+        timerLabel.textContent = "SPENTO";
+
+        status.textContent = "⚪ Spento";
+
     }
 
 }
-
 
 function renderAutomations() {
     var list = document.getElementById("automationList");
