@@ -766,7 +766,13 @@ body.dark .modal-box {
 .power-toggle:active {
     transform: scale(0.94);
 }
+/* HALO DESK OFF */
 
+.timer-ring.desk-off {
+    filter: grayscale(1);
+    opacity: 0.35;
+    box-shadow: none !important;
+}
 </style>
 </head>
 
@@ -2212,15 +2218,23 @@ function toggleHaloDesk() {
     var button =
         document.getElementById("powerToggle");
 
+    var ring =
+        document.getElementById("timerRing");
+
+
     if (haloDeskOn) {
 
         button.classList.remove("off");
         button.classList.add("on");
 
+        ring.classList.remove("desk-off");
+
     } else {
 
         button.classList.remove("on");
         button.classList.add("off");
+
+        ring.classList.add("desk-off");
 
     }
 
