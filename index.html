@@ -716,10 +716,55 @@ body.dark .modal-box {
 
     color: white;
 
-    font-weight: 800;
+        font-weight: 800;
 
     margin-top: 5px;
 
+}
+
+
+/* POWER TOGGLE */
+
+.power-toggle {
+    width: 46px;
+    height: 28px;
+    border: none;
+    border-radius: 999px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: #D0D5DD;
+}
+
+.power-toggle .power-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.power-toggle.on {
+    background: #0057B0;
+}
+
+.power-toggle.on .power-dot {
+    transform: translateX(18px);
+}
+
+.power-toggle.off {
+    background: #98A2B3;
+}
+
+.power-toggle.off .power-dot {
+    transform: translateX(0);
+}
+
+.power-toggle:active {
+    transform: scale(0.94);
 }
 
 </style>
@@ -2156,8 +2201,33 @@ document
     .classList.add("active");
 
 }
-  function renderAutomations() {
 
+
+var haloDeskOn = true;
+
+function toggleHaloDesk() {
+
+    haloDeskOn = !haloDeskOn;
+
+    var button =
+        document.getElementById("powerToggle");
+
+    if (haloDeskOn) {
+
+        button.classList.remove("off");
+        button.classList.add("on");
+
+    } else {
+
+        button.classList.remove("on");
+        button.classList.add("off");
+
+    }
+
+}
+
+
+function renderAutomations() {
     var list = document.getElementById("automationList");
 
     var automations =
