@@ -2147,7 +2147,7 @@ document
     .classList.add("active");
 
 }
-    function renderAutomations() {
+  function renderAutomations() {
 
     var list = document.getElementById("automationList");
 
@@ -2175,7 +2175,7 @@ document
 
     noAutomations.style.display = "none";
 
-    automations.forEach(function(auto) {
+    automations.forEach(function(auto, index) {
 
         var item =
             document.createElement("div");
@@ -2191,15 +2191,47 @@ document
             "<strong>" +
             auto.name +
             "</strong>" +
+
             "<div style='margin-top:6px;'>" +
             auto.time +
             " · " +
             auto.status +
-            "</div>";
+            "</div>" +
+
+            "<button " +
+            "onclick=\"deleteAutomation(" + index + ")\" " +
+            "style=\"margin-top:12px;" +
+            "background:#E5E7EB;" +
+            "color:#344054;" +
+            "border:none;" +
+            "border-radius:20px;" +
+            "padding:9px 16px;" +
+            "font-weight:600;\">" +
+            "Elimina" +
+            "</button>";
 
         list.appendChild(item);
 
     });
+
+}
+
+
+function deleteAutomation(index) {
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem("haloAutomations") || "[]"
+        );
+
+    automations.splice(index, 1);
+
+    localStorage.setItem(
+        "haloAutomations",
+        JSON.stringify(automations)
+    );
+
+    renderAutomations();
 
 }
 </script>
