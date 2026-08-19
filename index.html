@@ -2131,13 +2131,75 @@ function selectAutomationState(state) {
         status: selectedAutomationState,
         active: true
     });
+localStorage.setItem(
+    "haloAutomations",
+    JSON.stringify(automations)
+);
 
-    localStorage.setItem(
-        "haloAutomations",
-        JSON.stringify(automations)
-    );
+renderAutomations();
 
-    alert("Automazione salvata!");
+document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+});
+
+document
+    .getElementById("automations")
+    .classList.add("active");
+
+}
+    function renderAutomations() {
+
+    var list = document.getElementById("automationList");
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem("haloAutomations") || "[]"
+        );
+
+    var oldItems =
+        list.querySelectorAll(".automation-item");
+
+    oldItems.forEach(function(item) {
+        item.remove();
+    });
+
+    var noAutomations =
+        document.getElementById("noAutomations");
+
+    if (automations.length === 0) {
+
+        noAutomations.style.display = "block";
+        return;
+
+    }
+
+    noAutomations.style.display = "none";
+
+    automations.forEach(function(auto) {
+
+        var item =
+            document.createElement("div");
+
+        item.className = "automation-item";
+
+        item.style.marginTop = "14px";
+        item.style.padding = "16px";
+        item.style.borderRadius = "18px";
+        item.style.background = "#F5F7FA";
+
+        item.innerHTML =
+            "<strong>" +
+            auto.name +
+            "</strong>" +
+            "<div style='margin-top:6px;'>" +
+            auto.time +
+            " · " +
+            auto.status +
+            "</div>";
+
+        list.appendChild(item);
+
+    });
 
 }
 </script>
