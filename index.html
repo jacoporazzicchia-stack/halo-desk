@@ -1625,11 +1625,11 @@ updateColor();
 
 function changeState(newState) {
 
+    if (!haloDeskOn) return;
+
     if (newState === state) return;
 
-
     var now = Date.now();
-
 
     sessions.push({
 
@@ -1641,11 +1641,10 @@ function changeState(newState) {
 
         duration:
             Math.floor(
-                (now-startTime)/1000
+                (now - startTime) / 1000
             )
 
     });
-
 
     state = newState;
 
@@ -1673,6 +1672,44 @@ function changeState(newState) {
     updateStats();
 
 }
+
+
+function checkAutomations() {
+
+    if (!haloDeskOn) return;
+
+    var now = new Date();
+
+    var currentTime =
+        String(now.getHours()).padStart(2, "0") +
+        ":" +
+        String(now.getMinutes()).padStart(2, "0");
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem("haloAutomations") || "[]"
+        );
+
+    automations.forEach(function(auto) {
+
+        if (
+            auto.active &&
+            auto.time === currentTime
+        ) {
+
+            changeState(auto.status);
+
+        }
+
+    });
+
+}
+
+
+setInterval(
+    checkAutomations,
+    1000
+);
 
 
 /* =========================
