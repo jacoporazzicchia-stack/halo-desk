@@ -2068,6 +2068,68 @@ function selectAutomationState(state) {
     document.getElementById("selectedAutomationState")
         .textContent = "Stato selezionato: " + state;
 }
+    function saveAutomation() {
+
+    var name =
+        document.getElementById("automationName").value.trim();
+
+    var time =
+        document.getElementById("automationTime").value;
+
+    var errorName =
+        document.getElementById("automationNameError");
+
+    var errorTime =
+        document.getElementById("automationTimeError");
+
+    var errorState =
+        document.getElementById("automationStateError");
+
+    errorName.textContent = "";
+    errorTime.textContent = "";
+    errorState.textContent = "";
+
+    var valid = true;
+
+    if (!name) {
+        errorName.textContent = "Inserisci un nome";
+        valid = false;
+    }
+
+    if (!time) {
+        errorTime.textContent = "Seleziona un orario";
+        valid = false;
+    }
+
+    if (!selectedAutomationState) {
+        errorState.textContent = "Seleziona uno stato";
+        valid = false;
+    }
+
+    if (!valid) {
+        return;
+    }
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem("haloAutomations") || "[]"
+        );
+
+    automations.push({
+        name: name,
+        time: time,
+        status: selectedAutomationState,
+        active: true
+    });
+
+    localStorage.setItem(
+        "haloAutomations",
+        JSON.stringify(automations)
+    );
+
+    alert("Automazione salvata!");
+
+}
 </script>
 
 </body>
