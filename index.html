@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +13,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -21,8 +23,14 @@ html, body {
 body {
     background: #F5F7FA;
     color: #101828;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        Arial,
+        sans-serif;
     padding-bottom: 90px;
+    transition: background .25s, color .25s;
 }
 
 body.dark {
@@ -30,8 +38,14 @@ body.dark {
     color: white;
 }
 
+button,
+input {
+    font-family: inherit;
+}
 
-/* APP */
+button {
+    cursor: pointer;
+}
 
 .app {
     width: 100%;
@@ -40,7 +54,9 @@ body.dark {
 }
 
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header {
     height: 75px;
@@ -48,11 +64,13 @@ body.dark {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    gap: 10px;
 }
 
 .logo {
     font-size: 28px;
     font-weight: 800;
+    margin-right: auto;
 }
 
 .add {
@@ -66,7 +84,55 @@ body.dark {
 }
 
 
-/* PAGES */
+/* =========================
+   POWER
+========================= */
+
+.power-toggle {
+    width: 48px;
+    height: 29px;
+    border: none;
+    border-radius: 999px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.power-toggle .power-dot {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: white;
+    transition: transform .25s ease;
+    box-shadow: 0 2px 7px rgba(0,0,0,.18);
+}
+
+.power-toggle.on {
+    background: #0057B0;
+}
+
+.power-toggle.on .power-dot {
+    transform: translateX(19px);
+}
+
+.power-toggle.off {
+    background: #98A2B3;
+}
+
+.power-toggle.off .power-dot {
+    transform: translateX(0);
+}
+
+.power-toggle:active {
+    transform: scale(.94);
+}
+
+
+/* =========================
+   PAGES
+========================= */
 
 .page {
     display: none;
@@ -78,128 +144,85 @@ body.dark {
 }
 
 
-/* =====================
+/* =========================
    HOME
-===================== */
+========================= */
 
 .home {
     text-align: center;
 }
 
-
-/* CERCHIO */
-
 .timer-ring {
     width: 280px;
     height: 280px;
-
     margin: 30px auto 25px;
-
     border-radius: 50%;
-
     border: 3px solid #19C875;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     position: relative;
-
     box-shadow:
         0 0 15px #19C875,
         0 0 40px #19C875,
-        0 0 80px rgba(25,200,117,0.35);
-
-    transition: 0.5s;
+        0 0 80px rgba(25,200,117,.35);
+    transition: .5s;
 }
-
-
-/* AURA */
 
 .timer-ring:before {
-
     content: "";
-
     position: absolute;
-
     width: 250px;
     height: 250px;
-
     border-radius: 50%;
-
-    border: 1px solid rgba(25,200,117,0.35);
-
+    border: 1px solid rgba(25,200,117,.35);
 }
 
-
-/* CENTRO */
+.timer-ring.desk-off {
+    filter: grayscale(1);
+    opacity: .35;
+    box-shadow: none !important;
+}
 
 .timer-center {
-
     width: 220px;
     height: 220px;
-
     border-radius: 50%;
-
-    background: #FFFFFF;
-
+    background: white;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     position: relative;
-
     z-index: 2;
-
 }
 
 body.dark .timer-center {
     background: #0D2747;
 }
 
-
 .timer-label {
-
     font-size: 11px;
-
     color: #7C8490;
-
     letter-spacing: 1.5px;
-
     margin-bottom: 10px;
-
+    font-weight: 700;
 }
-
 
 .timer {
-
     font-size: 45px;
-
     font-weight: 800;
-
     letter-spacing: -3px;
-
     font-variant-numeric: tabular-nums;
-
 }
 
-
 .status {
-
     margin-top: 12px;
-
     padding: 7px 14px;
-
     border-radius: 30px;
-
     background: #F0F3F7;
-
     font-size: 13px;
-
     font-weight: 700;
-
 }
 
 body.dark .status {
@@ -207,46 +230,38 @@ body.dark .status {
 }
 
 
-/* BOTTONI STATO */
+/* =========================
+   STATES
+========================= */
 
 .states {
-
     display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
+    grid-template-columns: repeat(3,1fr);
     gap: 9px;
-
     margin-top: 15px;
-
 }
 
 .state {
-
     border: none;
-
     border-radius: 40px;
-
     padding: 15px 5px;
-
     color: white;
-
     font-size: 14px;
-
     font-weight: 750;
-
+    transition: .2s;
 }
+
+.state:active {
+    transform: scale(.96);
+}
+
 .state.selected {
-
-    transform: scale(1.05);
-
+    transform: scale(1.04);
     box-shadow:
         0 0 0 3px #0057B0,
         0 0 25px currentColor;
-
-    opacity: 1;
-
 }
+
 .green {
     background: #19C875;
 }
@@ -260,20 +275,16 @@ body.dark .status {
 }
 
 
-/* CARD */
+/* =========================
+   CARDS
+========================= */
 
 .card {
-
     background: white;
-
     border-radius: 25px;
-
     padding: 20px;
-
     margin-top: 18px;
-
     border: 1px solid #E6EAF0;
-
 }
 
 body.dark .card {
@@ -281,151 +292,138 @@ body.dark .card {
     border-color: #173858;
 }
 
-
 .card-title {
-
     font-size: 18px;
-
     font-weight: 800;
-
 }
 
 .muted {
-
     color: #7C8490;
-
     font-size: 14px;
-
     margin-top: 5px;
-
 }
 
 
-/* =====================
-   TITOLI
-===================== */
+/* =========================
+   TITLES
+========================= */
 
 .title {
-
     font-size: 30px;
-
     font-weight: 800;
-
     margin-top: 10px;
-
 }
 
 .subtitle {
-
     color: #7C8490;
-
     margin: 5px 0 22px;
-
 }
 
 
-/* =====================
-   STATISTICHE
-===================== */
+/* =========================
+   BUTTONS
+========================= */
+
+.main-button {
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    padding: 17px;
+    background: #0057B0;
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+.secondary-button {
+    width: 100%;
+    border: none;
+    border-radius: 18px;
+    padding: 15px;
+    background: #E9EDF2;
+    color: #101828;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+body.dark .secondary-button {
+    background: #173858;
+    color: white;
+}
+
+.danger-button {
+    width: 100%;
+    border: none;
+    border-radius: 18px;
+    padding: 15px;
+    background: #FEE4E2;
+    color: #D92D20;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   STATS
+========================= */
 
 .tabs {
-
     display: grid;
-
     grid-template-columns: repeat(3,1fr);
-
     gap: 5px;
-
     padding: 5px;
-
     background: #E9EDF2;
-
     border-radius: 20px;
-
 }
 
 body.dark .tabs {
     background: #0D2747;
 }
 
-
 .tab {
-
     border: none;
-
     background: transparent;
-
     padding: 12px 3px;
-
     border-radius: 16px;
-
     font-weight: 700;
-
 }
 
 .tab.active {
-
     background: #0057B0;
-
     color: white;
-
 }
-
 
 .total {
-
     font-size: 38px;
-
     font-weight: 800;
-
     margin-top: 8px;
-
 }
 
-
 .stat {
-
     margin-top: 22px;
-
 }
 
 .stat-head {
-
     display: flex;
-
     justify-content: space-between;
-
     font-size: 14px;
-
     font-weight: 700;
-
     margin-bottom: 8px;
-
 }
 
-
 .bar {
-
     height: 9px;
-
     background: #E8ECF1;
-
     border-radius: 20px;
-
     overflow: hidden;
-
 }
 
 .fill {
-
     height: 100%;
-
-    width: 0%;
-
+    width: 0;
     border-radius: 20px;
-
     transition: width .5s;
-
 }
 
 .fill.green {
@@ -441,85 +439,55 @@ body.dark .tabs {
 }
 
 
-/* =====================
+/* =========================
    STUDIO
-===================== */
+========================= */
 
 .study-timer {
-
     text-align: center;
-
     font-size: 60px;
-
     font-weight: 800;
-
     margin: 25px 0;
-
+    font-variant-numeric: tabular-nums;
 }
 
-.main-button {
-
-    width: 100%;
-
-    border: none;
-
-    border-radius: 20px;
-
-    padding: 17px;
-
-    background: #0057B0;
-
-    color: white;
-
-    font-size: 17px;
-
+.study-mode {
+    text-align: center;
     font-weight: 800;
-
+    margin-top: 10px;
 }
 
 .study-buttons {
-
     display: grid;
-
     grid-template-columns: repeat(3,1fr);
-
     gap: 8px;
-
     margin-top: 10px;
-
 }
 
 .study-buttons button {
-
     border: none;
-
     border-radius: 17px;
-
     padding: 14px 3px;
-
     background: #EEF1F5;
-
     font-weight: 700;
+}
 
+body.dark .study-buttons button {
+    background: #173858;
+    color: white;
 }
 
 
-/* =====================
+/* =========================
    LISTE
-===================== */
+========================= */
 
 .item {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     padding: 17px 0;
-
     border-bottom: 1px solid #E6EAF0;
-
 }
 
 body.dark .item {
@@ -531,33 +499,21 @@ body.dark .item {
 }
 
 .item-left {
-
     display: flex;
-
     align-items: center;
-
     gap: 13px;
-
 }
 
 .icon {
-
     width: 43px;
-
     height: 43px;
-
     border-radius: 14px;
-
     background: #F0F3F7;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     font-size: 19px;
-
+    flex-shrink: 0;
 }
 
 body.dark .icon {
@@ -565,44 +521,120 @@ body.dark .icon {
 }
 
 .arrow {
-
     font-size: 23px;
-
     color: #7C8490;
-
 }
 
 
-/* =====================
+/* =========================
+   AUTOMATION
+========================= */
+
+.automation-item {
+    margin-top: 12px;
+    padding: 16px;
+    border-radius: 20px;
+    background: #F5F7FA;
+    border: 1px solid #E6EAF0;
+}
+
+body.dark .automation-item {
+    background: #102F50;
+    border-color: #173858;
+}
+
+.automation-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.automation-name {
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.automation-time {
+    font-size: 14px;
+    color: #7C8490;
+    margin-top: 7px;
+}
+
+.automation-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.small-button {
+    border: none;
+    border-radius: 14px;
+    padding: 9px 13px;
+    font-weight: 700;
+}
+
+.delete-button {
+    background: #FEE4E2;
+    color: #D92D20;
+}
+
+.toggle-automation {
+    background: #E9EDF2;
+    color: #344054;
+}
+
+body.dark .toggle-automation {
+    background: #173858;
+    color: white;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid #DCE2E9;
+    margin-top: 10px;
+    font-size: 16px;
+    background: white;
+    color: #101828;
+}
+
+body.dark .input {
+    background: #102F50;
+    color: white;
+    border-color: #31516F;
+}
+
+.error {
+    color: #D92D20;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+
+/* =========================
    NAV
-===================== */
+========================= */
 
 .nav {
-
     position: fixed;
-
     bottom: 0;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     width: 100%;
-
     max-width: 520px;
-
     height: 72px;
-
     background: white;
-
     border-top: 1px solid #E6EAF0;
-
     display: grid;
-
     grid-template-columns: repeat(5,1fr);
-
     z-index: 20;
-
 }
 
 body.dark .nav {
@@ -610,56 +642,36 @@ body.dark .nav {
     border-color: #173858;
 }
 
-
 .nav button {
-
     border: none;
-
     background: transparent;
-
     color: #7C8490;
-
     font-size: 10px;
-
     font-weight: 700;
-
 }
 
 .nav button.active {
-
     color: #0057B0;
-
 }
 
 .nav-icon {
-
     display: block;
-
     font-size: 20px;
-
     margin-bottom: 3px;
-
 }
 
 
-/* =====================
-   MODALE
-===================== */
+/* =========================
+   MODAL
+========================= */
 
 .modal {
-
     display: none;
-
     position: fixed;
-
     inset: 0;
-
     background: rgba(0,0,0,.55);
-
     z-index: 100;
-
     align-items: flex-end;
-
 }
 
 .modal.show {
@@ -667,165 +679,215 @@ body.dark .nav {
 }
 
 .modal-box {
-
     width: 100%;
-
     max-width: 520px;
-
     margin: auto;
-
     background: white;
-
     padding: 25px;
-
     border-radius: 30px 30px 0 0;
-
 }
 
 body.dark .modal-box {
     background: #0D2747;
 }
 
-.input {
 
-    width: 100%;
+/* =========================
+   SETTING SWITCH
+========================= */
 
-    padding: 15px;
-
-    border-radius: 16px;
-
-    border: 1px solid #DCE2E9;
-
-    margin-bottom: 10px;
-
-    font-size: 16px;
-
-}
-
-.modal-button {
-
-    width: 100%;
-
-    border: none;
-
-    border-radius: 18px;
-
-    padding: 16px;
-
-    background: #0057B0;
-
-    color: white;
-
-        font-weight: 800;
-
-    margin-top: 5px;
-
-}
-
-
-/* POWER TOGGLE */
-
-.power-toggle {
-    width: 46px;
+.setting-switch {
+    width: 48px;
     height: 28px;
     border: none;
     border-radius: 999px;
+    background: #98A2B3;
     padding: 3px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    background: #D0D5DD;
 }
 
-.power-toggle .power-dot {
+.setting-switch span {
+    display: block;
     width: 22px;
     height: 22px;
-    border-radius: 50%;
     background: white;
-    transition: transform 0.25s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 50%;
+    transition: .2s;
 }
 
-.power-toggle.on {
+.setting-switch.active {
     background: #0057B0;
 }
 
-.power-toggle.on .power-dot {
-    transform: translateX(18px);
+.setting-switch.active span {
+    transform: translateX(20px);
 }
 
-.power-toggle.off {
-    background: #98A2B3;
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+    text-align: center;
+    padding: 20px 0;
+    color: #7C8490;
 }
 
-.power-toggle.off .power-dot {
-    transform: translateX(0);
+
+/* =========================
+   DEVICE
+========================= */
+
+.device-card {
+    text-align: center;
 }
 
-.power-toggle:active {
-    transform: scale(0.94);
+.device-status {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #ECFDF3;
+    color: #027A48;
+    font-size: 13px;
+    font-weight: 700;
 }
-/* HALO DESK OFF */
 
-.timer-ring.desk-off {
-    filter: grayscale(1);
-    opacity: 0.35;
-    box-shadow: none !important;
+body.dark .device-status {
+    background: #123E30;
+    color: #6CE9A6;
 }
+
+
+/* =========================
+   TEAM
+========================= */
+
+.team-member {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #E6EAF0;
+}
+
+body.dark .team-member {
+    border-color: #173858;
+}
+
+.team-member:last-child {
+    border-bottom: none;
+}
+
+.member-name {
+    font-weight: 800;
+}
+
+.member-role {
+    color: #7C8490;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:360px) {
+
+    .timer-ring {
+        width: 250px;
+        height: 250px;
+    }
+
+    .timer-center {
+        width: 195px;
+        height: 195px;
+    }
+
+    .timer {
+        font-size: 38px;
+    }
+
+}
+
 </style>
-</head>
 
+</head>
 
 <body>
 
 <div class="app">
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header class="header">
 
     <div class="logo">
         Halo Desk
     </div>
+
     <button
-    id="powerToggle"
-    class="power-toggle on"
-    onclick="toggleHaloDesk()"
-    aria-label="Accendi o spegni Halo Desk">
+        id="powerToggle"
+        class="power-toggle on"
+        onclick="toggleHaloDesk()"
+        aria-label="Accendi o spegni Halo Desk">
 
-    <span class="power-dot"></span>
+        <span class="power-dot"></span>
 
-</button>
+    </button>
 
-    <button class="add"
-            onclick="openDevice()">
+    <button
+        class="add"
+        onclick="openDevice()">
+
         +
+
     </button>
 
 </header>
 
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
-<section id="home" class="page active home">
+<section
+    id="home"
+    class="page active home">
 
-    <div id="timerRing"
-         class="timer-ring">
+    <div
+        id="timerRing"
+        class="timer-ring">
 
         <div class="timer-center">
 
-            <div class="timer-label">
+            <div
+                id="timerLabel"
+                class="timer-label">
+
                 STATO ATTUALE
+
             </div>
 
-            <div id="mainTimer"
-                 class="timer">
+            <div
+                id="mainTimer"
+                class="timer">
+
                 00:00:00
+
             </div>
 
-            <div id="status"
-                 class="status">
+            <div
+                id="status"
+                class="status">
+
                 🟢 Libero
+
             </div>
 
         </div>
@@ -835,19 +897,31 @@ body.dark .modal-box {
 
     <div class="states">
 
-        <button class="state green"
-                onclick="changeState('Libero')">
+        <button
+            id="stateFree"
+            class="state green"
+            onclick="changeState('Libero')">
+
             Libero
+
         </button>
 
-        <button class="state red"
-                onclick="changeState('Occupato')">
+        <button
+            id="stateBusy"
+            class="state red"
+            onclick="changeState('Occupato')">
+
             Occupato
+
         </button>
 
-        <button class="state blue"
-                onclick="changeState('Focus')">
+        <button
+            id="stateFocus"
+            class="state blue"
+            onclick="changeState('Focus')">
+
             Focus
+
         </button>
 
     </div>
@@ -859,9 +933,39 @@ body.dark .modal-box {
             Sessione corrente
         </div>
 
-        <div id="sessionText"
-             class="muted">
-            Libero
+        <div
+            id="sessionText"
+            class="muted">
+
+            Stato attivo: Libero
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="deviceHomeCard"
+        class="card device-card">
+
+        <div class="card-title">
+            Halo Desk
+        </div>
+
+        <div
+            id="deviceHomeName"
+            class="muted">
+
+            Nessun dispositivo configurato
+
+        </div>
+
+        <div
+            id="deviceHomeStatus"
+            class="device-status">
+
+            Online
+
         </div>
 
     </div>
@@ -869,10 +973,13 @@ body.dark .modal-box {
 </section>
 
 
-<!-- STATISTICHE -->
+<!-- =========================
+     STATISTICHE
+========================= -->
 
-<section id="stats"
-         class="page">
+<section
+    id="stats"
+    class="page">
 
     <div class="title">
         Statistiche
@@ -885,22 +992,31 @@ body.dark .modal-box {
 
     <div class="tabs">
 
-        <button id="dayTab"
-                class="tab active"
-                onclick="setPeriod('day')">
+        <button
+            id="dayTab"
+            class="tab active"
+            onclick="setPeriod('day')">
+
             Giorno
+
         </button>
 
-        <button id="weekTab"
-                class="tab"
-                onclick="setPeriod('week')">
+        <button
+            id="weekTab"
+            class="tab"
+            onclick="setPeriod('week')">
+
             Settimana
+
         </button>
 
-        <button id="monthTab"
-                class="tab"
-                onclick="setPeriod('month')">
+        <button
+            id="monthTab"
+            class="tab"
+            onclick="setPeriod('month')">
+
             Mese
+
         </button>
 
     </div>
@@ -912,23 +1028,34 @@ body.dark .modal-box {
             Tempo totale
         </div>
 
-        <div id="total"
-             class="total">
+        <div
+            id="total"
+            class="total">
+
             0 min
+
         </div>
 
 
         <div class="stat">
 
             <div class="stat-head">
+
                 <span>🟢 Libero</span>
-                <span id="free">0 min</span>
+
+                <span id="free">
+                    0 min
+                </span>
+
             </div>
 
             <div class="bar">
-                <div id="freeBar"
-                     class="fill green">
+
+                <div
+                    id="freeBar"
+                    class="fill green">
                 </div>
+
             </div>
 
         </div>
@@ -937,14 +1064,22 @@ body.dark .modal-box {
         <div class="stat">
 
             <div class="stat-head">
+
                 <span>🔴 Occupato</span>
-                <span id="busy">0 min</span>
+
+                <span id="busy">
+                    0 min
+                </span>
+
             </div>
 
             <div class="bar">
-                <div id="busyBar"
-                     class="fill red">
+
+                <div
+                    id="busyBar"
+                    class="fill red">
                 </div>
+
             </div>
 
         </div>
@@ -953,14 +1088,22 @@ body.dark .modal-box {
         <div class="stat">
 
             <div class="stat-head">
+
                 <span>🔵 Focus</span>
-                <span id="focus">0 min</span>
+
+                <span id="focus">
+                    0 min
+                </span>
+
             </div>
 
             <div class="bar">
-                <div id="focusBar"
-                     class="fill blue">
+
+                <div
+                    id="focusBar"
+                    class="fill blue">
                 </div>
+
             </div>
 
         </div>
@@ -968,8 +1111,9 @@ body.dark .modal-box {
     </div>
 
 
-    <div id="periodCard"
-         class="card">
+    <div
+        id="periodCard"
+        class="card">
 
         <div class="card-title">
             Oggi
@@ -984,10 +1128,13 @@ body.dark .modal-box {
 </section>
 
 
-<!-- STUDIO -->
+<!-- =========================
+     STUDIO
+========================= -->
 
-<section id="study"
-         class="page">
+<section
+    id="study"
+    class="page">
 
     <div class="title">
         Studio
@@ -1008,9 +1155,20 @@ body.dark .modal-box {
             25 minuti studio · 5 minuti pausa
         </div>
 
-        <button class="main-button"
-                onclick="pomodoro()">
+        <div
+            id="studyMode"
+            class="study-mode">
+
+            Studio
+
+        </div>
+
+        <button
+            class="main-button"
+            onclick="pomodoro()">
+
             Avvia Pomodoro
+
         </button>
 
     </div>
@@ -1018,10 +1176,14 @@ body.dark .modal-box {
 
     <div class="card">
 
-        <div id="studyTimer"
-             class="study-timer">
+        <div
+            id="studyTimer"
+            class="study-timer">
+
             25:00
+
         </div>
+
 
         <div class="study-buttons">
 
@@ -1044,49 +1206,73 @@ body.dark .modal-box {
 </section>
 
 
-<!-- TEAM -->
+<!-- =========================
+     TEAM
+========================= -->
 
-<section id="team"
-         class="page">
+<section
+    id="team"
+    class="page">
 
     <div class="title">
         Team
     </div>
 
     <div class="subtitle">
-        Gestisci più Halo Desk.
+        Gestisci il tuo gruppo.
     </div>
 
 
     <div class="card">
 
-        <div class="item"
-             onclick="teamFeature('partecipanti')">
+        <div class="card-title">
+            Partecipanti
+        </div>
 
-            <div class="item-left">
+        <div class="muted">
+            Aggiungi le persone del tuo team.
+        </div>
 
-                <div class="icon">
-                    👥
-                </div>
+        <input
+            id="memberName"
+            class="input"
+            placeholder="Nome partecipante">
 
-                <div>
-                    <b>Partecipanti</b>
-                    <div class="muted">
-                        Aggiungi persone
-                    </div>
-                </div>
+        <button
+            class="main-button"
+            onclick="addMember()">
 
-            </div>
+            + Aggiungi partecipante
 
-            <div class="arrow">
-                ›
-            </div>
+        </button>
+
+    </div>
+
+
+    <div
+        id="teamList"
+        class="card">
+
+        <div class="card-title">
+            Il tuo team
+        </div>
+
+        <div
+            id="noMembers"
+            class="empty">
+
+            Nessun partecipante ancora.
 
         </div>
 
+    </div>
 
-        <div class="item"
-             onclick="teamFeature('turni')">
+
+    <div class="card">
+
+        <div
+            class="item"
+            onclick="teamFeature('turni')">
 
             <div class="item-left">
 
@@ -1095,10 +1281,13 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Turni</b>
+
                     <div class="muted">
-                        Tempo di parola
+                        Gestisci il tempo di parola
                     </div>
+
                 </div>
 
             </div>
@@ -1114,44 +1303,72 @@ body.dark .modal-box {
 </section>
 
 
-<!-- ALTRO -->
-    <!-- AUTOMAZIONI -->
-<section id="automations" class="page">
+<!-- =========================
+     AUTOMAZIONI
+========================= -->
+
+<section
+    id="automations"
+    class="page">
+
     <div class="title">
         Automazioni
     </div>
+
     <div class="subtitle">
         Lascia che Halo Desk gestisca automaticamente i tuoi stati.
     </div>
+
+
     <div class="card">
+
         <div class="card-title">
             Crea automazione
         </div>
+
         <div class="muted">
             Imposta quando Halo Desk deve cambiare stato.
         </div>
+
         <button
             class="main-button"
-            onclick="createAutomation()"
-            style="margin-top:18px;">
+            onclick="createAutomation()">
+
             + Nuova automazione
+
         </button>
+
     </div>
-    <div id="automationList"
-         class="card">
+
+
+    <div
+        id="automationList"
+        class="card">
+
         <div class="card-title">
             Le tue automazioni
         </div>
-        <div id="noAutomations"
-             class="muted"
-             style="margin-top:8px;">
-            Nessuna automazione ancora.
-        </div>
-    </div>
-</section>
-<!-- CREA AUTOMAZIONE -->
 
-<section id="createAutomationPage" class="page">
+        <div
+            id="noAutomations"
+            class="empty">
+
+            Nessuna automazione ancora.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CREA AUTOMAZIONE
+========================= -->
+
+<section
+    id="createAutomationPage"
+    class="page">
 
     <div class="title">
         Nuova automazione
@@ -1160,6 +1377,7 @@ body.dark .modal-box {
     <div class="subtitle">
         Scegli quando e come Halo Desk deve cambiare stato.
     </div>
+
 
     <div class="card">
 
@@ -1171,12 +1389,12 @@ body.dark .modal-box {
             id="automationName"
             class="input"
             type="text"
-            placeholder="Es. Riunione mattutina"
-        >
+            placeholder="Es. Riunione mattutina">
+
         <div
-    id="automationNameError"
-    style="color:#D92D20;font-size:13px;margin-top:6px;">
-</div>
+            id="automationNameError"
+            class="error">
+        </div>
 
     </div>
 
@@ -1190,12 +1408,13 @@ body.dark .modal-box {
         <input
             id="automationTime"
             class="input"
-            type="time"
-        >
-<div
-    id="automationTimeError"
-    style="color:#D92D20;font-size:13px;margin-top:6px;">
-</div>
+            type="time">
+
+        <div
+            id="automationTimeError"
+            class="error">
+        </div>
+
     </div>
 
 
@@ -1205,62 +1424,83 @@ body.dark .modal-box {
             Stato Halo Desk
         </div>
 
+
         <div class="states">
 
             <button
                 id="autoFree"
                 class="state green"
                 onclick="selectAutomationState('Libero')">
+
                 Libero
+
             </button>
 
             <button
                 id="autoBusy"
                 class="state red"
                 onclick="selectAutomationState('Occupato')">
+
                 Occupato
+
             </button>
 
             <button
                 id="autoFocus"
                 class="state blue"
                 onclick="selectAutomationState('Focus')">
+
                 Focus
+
             </button>
 
         </div>
 
+
         <div
             id="selectedAutomationState"
-            class="muted"
-            style="margin-top:15px;">
+            class="muted">
+
             Nessuno stato selezionato
+
         </div>
-<div
-    id="automationStateError"
-    style="color:#D92D20;font-size:13px;margin-top:6px;">
-</div>
+
+
+        <div
+            id="automationStateError"
+            class="error">
+        </div>
+
     </div>
 
 
     <button
         class="main-button"
-        onclick="saveAutomation()"
-        style="margin-top:18px;">
+        onclick="saveAutomation()">
+
         Salva automazione
+
     </button>
 
 
     <button
-        class="main-button"
-        onclick="closeAutomationPage()"
-        style="margin-top:10px;background:#E9EDF2;color:#101828;">
+        class="secondary-button"
+        onclick="closeAutomationPage()">
+
         Annulla
+
     </button>
 
 </section>
-<section id="more"
-         class="page">
+
+
+<!-- =========================
+     ALTRO
+========================= -->
+
+<section
+    id="more"
+    class="page">
 
     <div class="title">
         Altro
@@ -1273,9 +1513,9 @@ body.dark .modal-box {
 
     <div class="card">
 
-
-        <div class="item"
-             onclick="openFeature('Automazioni')">
+        <div
+            class="item"
+            onclick="openFeature('Automazioni')">
 
             <div class="item-left">
 
@@ -1284,22 +1524,27 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Automazioni</b>
 
                     <div class="muted">
                         Routine automatiche
                     </div>
+
                 </div>
 
             </div>
 
-            <div class="arrow">›</div>
+            <div class="arrow">
+                ›
+            </div>
 
         </div>
 
 
-        <div class="item"
-             onclick="openFeature('Calendario')">
+        <div
+            class="item"
+            onclick="openFeature('Calendario')">
 
             <div class="item-left">
 
@@ -1308,22 +1553,27 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Calendario</b>
 
                     <div class="muted">
                         Riunioni e appuntamenti
                     </div>
+
                 </div>
 
             </div>
 
-            <div class="arrow">›</div>
+            <div class="arrow">
+                ›
+            </div>
 
         </div>
 
 
-        <div class="item"
-             onclick="openFeature('Notifiche')">
+        <div
+            class="item"
+            onclick="openFeature('Notifiche')">
 
             <div class="item-left">
 
@@ -1332,22 +1582,27 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Notifiche</b>
 
                     <div class="muted">
                         Timer e cambi di stato
                     </div>
+
                 </div>
 
             </div>
 
-            <div class="arrow">›</div>
+            <div class="arrow">
+                ›
+            </div>
 
         </div>
 
 
-        <div class="item"
-             onclick="openFeature('Personalizzazione')">
+        <div
+            class="item"
+            onclick="openFeature('Personalizzazione')">
 
             <div class="item-left">
 
@@ -1356,22 +1611,27 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Personalizzazione</b>
 
                     <div class="muted">
-                        LED e luminosità
+                        Aspetto dell'app
                     </div>
+
                 </div>
 
             </div>
 
-            <div class="arrow">›</div>
+            <div class="arrow">
+                ›
+            </div>
 
         </div>
 
 
-        <div class="item"
-             onclick="toggleDark()">
+        <div
+            class="item"
+            onclick="toggleDark()">
 
             <div class="item-left">
 
@@ -1380,11 +1640,13 @@ body.dark .modal-box {
                 </div>
 
                 <div>
+
                     <b>Modalità Dark</b>
 
                     <div class="muted">
                         Blu notte
                     </div>
+
                 </div>
 
             </div>
@@ -1397,49 +1659,155 @@ body.dark .modal-box {
 
     </div>
 
+
+    <!-- IMPOSTAZIONI -->
+
+    <div class="card">
+
+        <div class="card-title">
+            Impostazioni
+        </div>
+
+
+        <div class="item">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    🔔
+                </div>
+
+                <div>
+
+                    <b>Notifiche</b>
+
+                    <div class="muted">
+                        Avvisi automazioni
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                id="notificationSwitch"
+                class="setting-switch"
+                onclick="toggleNotifications()">
+
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <div class="item">
+
+            <div class="item-left">
+
+                <div class="icon">
+                    📳
+                </div>
+
+                <div>
+
+                    <b>Suoni</b>
+
+                    <div class="muted">
+                        Suono cambi stato
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                id="soundSwitch"
+                class="setting-switch"
+                onclick="toggleSound()">
+
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <button
+            class="danger-button"
+            onclick="resetAllData()">
+
+            Cancella tutti i dati
+
+        </button>
+
+    </div>
+
 </section>
 
 
-<!-- NAV -->
+<!-- =========================
+     NAV
+========================= -->
 
 <nav class="nav">
 
-    <button class="active"
-            onclick="page('home',this)">
+    <button
+        class="active"
+        onclick="page('home',this)">
 
-        <span class="nav-icon">⌂</span>
+        <span class="nav-icon">
+            ⌂
+        </span>
+
         Home
 
     </button>
 
 
-    <button onclick="page('stats',this)">
+    <button
+        onclick="page('stats',this)">
 
-        <span class="nav-icon">▥</span>
+        <span class="nav-icon">
+            ▥
+        </span>
+
         Statistiche
 
     </button>
 
 
-    <button onclick="page('study',this)">
+    <button
+        onclick="page('study',this)">
 
-        <span class="nav-icon">◷</span>
+        <span class="nav-icon">
+            ◷
+        </span>
+
         Studio
 
     </button>
 
 
-    <button onclick="page('team',this)">
+    <button
+        onclick="page('team',this)">
 
-        <span class="nav-icon">♧</span>
+        <span class="nav-icon">
+            ♧
+        </span>
+
         Team
 
     </button>
 
 
-    <button onclick="page('more',this)">
+    <button
+        onclick="page('more',this)">
 
-        <span class="nav-icon">•••</span>
+        <span class="nav-icon">
+            •••
+        </span>
+
         Altro
 
     </button>
@@ -1450,10 +1818,13 @@ body.dark .modal-box {
 </div>
 
 
-<!-- MODALE -->
+<!-- =========================
+     DEVICE MODAL
+========================= -->
 
-<div id="modal"
-     class="modal">
+<div
+    id="modal"
+    class="modal">
 
     <div class="modal-box">
 
@@ -1461,23 +1832,30 @@ body.dark .modal-box {
             Aggiungi Halo Desk
         </h2>
 
-        <input id="deviceName"
-               class="input"
-               placeholder="Nome dispositivo">
+        <input
+            id="deviceName"
+            class="input"
+            placeholder="Nome dispositivo">
 
-        <input id="deviceCode"
-               class="input"
-               placeholder="Codice dispositivo">
+        <input
+            id="deviceCode"
+            class="input"
+            placeholder="Codice dispositivo">
 
-        <button class="modal-button"
-                onclick="saveDevice()">
+        <button
+            class="main-button"
+            onclick="saveDevice()">
+
             Aggiungi
+
         </button>
 
-        <button class="modal-button"
-                onclick="closeDevice()"
-                style="background:#E9EDF2;color:#111;">
+        <button
+            class="secondary-button"
+            onclick="closeDevice()">
+
             Annulla
+
         </button>
 
     </div>
@@ -1487,9 +1865,10 @@ body.dark .modal-box {
 
 <script>
 
-/* =========================
-   STATO
-========================= */
+
+/* =========================================================
+   DATI PRINCIPALI
+========================================================= */
 
 var state =
     localStorage.getItem("haloState") || "Libero";
@@ -1504,36 +1883,162 @@ var startTime =
         localStorage.getItem("haloStart")
     ) || Date.now();
 
+var haloDeskOn =
+    localStorage.getItem("haloDeskOn") !== "false";
 
-/* =========================
-   TIMER
-========================= */
+var period = "day";
+
+var selectedAutomationState = "";
+
+var lastAutomationMinute = "";
+
+var studySeconds =
+    Number(
+        localStorage.getItem("studySeconds")
+    ) || 1500;
+
+var studyInterval = null;
+
+var studyMode =
+    localStorage.getItem("studyMode") || "Studio";
+
+var notificationsEnabled =
+    localStorage.getItem("haloNotifications") !== "false";
+
+var soundEnabled =
+    localStorage.getItem("haloSound") === "true";
+
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+function pad(n) {
+    return String(n).padStart(2,"0");
+}
+
 
 function format(seconds) {
+
+    seconds = Math.max(
+        0,
+        Math.floor(seconds)
+    );
 
     var h =
         Math.floor(seconds / 3600);
 
     var m =
-        Math.floor((seconds % 3600) / 60);
+        Math.floor(
+            (seconds % 3600) / 60
+        );
 
     var s =
         seconds % 60;
 
     return (
-        String(h).padStart(2,"0") +
+        pad(h) +
         ":" +
-        String(m).padStart(2,"0") +
+        pad(m) +
         ":" +
-        String(s).padStart(2,"0")
+        pad(s)
     );
-
 }
 
 
+function formatMinutes(seconds) {
+
+    var minutes =
+        Math.floor(seconds / 60);
+
+    if (minutes < 1) {
+        return "0 min";
+    }
+
+    var hours =
+        Math.floor(minutes / 60);
+
+    var remaining =
+        minutes % 60;
+
+    if (hours > 0) {
+
+        return (
+            hours +
+            " h " +
+            remaining +
+            " min"
+        );
+
+    }
+
+    return minutes + " min";
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function startOfDay(date) {
+
+    var d = new Date(date);
+
+    d.setHours(0,0,0,0);
+
+    return d.getTime();
+}
+
+
+function startOfWeek(date) {
+
+    var d = new Date(date);
+
+    d.setHours(0,0,0,0);
+
+    var day = d.getDay();
+
+    var diff =
+        day === 0
+            ? -6
+            : 1 - day;
+
+    d.setDate(
+        d.getDate() + diff
+    );
+
+    return d.getTime();
+}
+
+
+function startOfMonth(date) {
+
+    var d = new Date(date);
+
+    d.setHours(0,0,0,0);
+
+    d.setDate(1);
+
+    return d.getTime();
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
 function timerUpdate() {
 
+    var timer =
+        document.getElementById("mainTimer");
+
+    if (!timer) return;
+
     if (!haloDeskOn) {
+
+        timer.textContent =
+            "00:00:00";
+
         return;
     }
 
@@ -1542,19 +2047,20 @@ function timerUpdate() {
             (Date.now() - startTime) / 1000
         );
 
-    document.getElementById("mainTimer")
-        .innerHTML =
+    timer.textContent =
         format(seconds);
-
 }
 
 
-setInterval(timerUpdate,1000);
+setInterval(
+    timerUpdate,
+    1000
+);
 
 
-/* =========================
-   COLORE CERCHIO
-========================= */
+/* =========================================================
+   COLORE
+========================================================= */
 
 function updateColor() {
 
@@ -1564,6 +2070,22 @@ function updateColor() {
     var status =
         document.getElementById("status");
 
+    var sessionText =
+        document.getElementById("sessionText");
+
+    if (!ring || !status) return;
+
+
+    document
+        .querySelectorAll(".state")
+        .forEach(function(button) {
+
+            button.classList.remove(
+                "selected"
+            );
+
+        });
+
 
     if (state === "Libero") {
 
@@ -1571,10 +2093,16 @@ function updateColor() {
             "#19C875";
 
         ring.style.boxShadow =
-            "0 0 15px #19C875, 0 0 40px #19C875, 0 0 80px rgba(25,200,117,.35)";
+            "0 0 15px #19C875," +
+            "0 0 40px #19C875," +
+            "0 0 80px rgba(25,200,117,.35)";
 
-        status.innerHTML =
+        status.textContent =
             "🟢 Libero";
+
+        document
+            .getElementById("stateFree")
+            .classList.add("selected");
 
     }
 
@@ -1585,10 +2113,16 @@ function updateColor() {
             "#F04444";
 
         ring.style.boxShadow =
-            "0 0 15px #F04444, 0 0 40px #F04444, 0 0 80px rgba(240,68,68,.35)";
+            "0 0 15px #F04444," +
+            "0 0 40px #F04444," +
+            "0 0 80px rgba(240,68,68,.35)";
 
-        status.innerHTML =
+        status.textContent =
             "🔴 Occupato";
+
+        document
+            .getElementById("stateBusy")
+            .classList.add("selected");
 
     }
 
@@ -1599,37 +2133,208 @@ function updateColor() {
             "#3578E5";
 
         ring.style.boxShadow =
-            "0 0 15px #3578E5, 0 0 40px #3578E5, 0 0 80px rgba(53,120,229,.40)";
+            "0 0 15px #3578E5," +
+            "0 0 40px #3578E5," +
+            "0 0 80px rgba(53,120,229,.40)";
 
-        status.innerHTML =
+        status.textContent =
             "🔵 Focus";
+
+        document
+            .getElementById("stateFocus")
+            .classList.add("selected");
 
     }
 
 
-    document.getElementById("sessionText")
-        .innerHTML =
-        "Stato attivo: <b>" +
-        state +
-        "</b>";
+    if (sessionText) {
+
+        sessionText.innerHTML =
+            "Stato attivo: <b>" +
+            state +
+            "</b>";
+
+    }
 
 }
 
 
-updateColor();
+/* =========================================================
+   POWER
+========================================================= */
+
+function updatePowerUI() {
+
+    var button =
+        document.getElementById("powerToggle");
+
+    var ring =
+        document.getElementById("timerRing");
+
+    var label =
+        document.getElementById("timerLabel");
+
+    var status =
+        document.getElementById("status");
+
+    var homeStatus =
+        document.getElementById(
+            "deviceHomeStatus"
+        );
 
 
-/* =========================
+    if (haloDeskOn) {
+
+        button.classList.remove("off");
+        button.classList.add("on");
+
+        ring.classList.remove(
+            "desk-off"
+        );
+
+        label.textContent =
+            "STATO ATTUALE";
+
+        updateColor();
+
+        if (homeStatus) {
+
+            homeStatus.textContent =
+                "Online";
+
+        }
+
+    } else {
+
+        button.classList.remove("on");
+        button.classList.add("off");
+
+        ring.classList.add(
+            "desk-off"
+        );
+
+        label.textContent =
+            "SPENTO";
+
+        status.textContent =
+            "⚪ Spento";
+
+        document
+            .getElementById("sessionText")
+            .innerHTML =
+            "Halo Desk è <b>spento</b>";
+
+        if (homeStatus) {
+
+            homeStatus.textContent =
+                "Spento";
+
+        }
+
+    }
+
+    timerUpdate();
+
+}
+
+
+function toggleHaloDesk() {
+
+    if (haloDeskOn) {
+
+        /*
+         * Prima di spegnere chiudiamo
+         * la sessione corrente.
+         */
+
+        var now =
+            Date.now();
+
+        sessions.push({
+
+            state: state,
+
+            start: startTime,
+
+            end: now,
+
+            duration:
+                Math.max(
+                    0,
+                    Math.floor(
+                        (now - startTime) / 1000
+                    )
+                )
+
+        });
+
+        localStorage.setItem(
+            "haloSessions",
+            JSON.stringify(sessions)
+        );
+
+        haloDeskOn = false;
+
+        localStorage.setItem(
+            "haloDeskOn",
+            "false"
+        );
+
+    } else {
+
+        haloDeskOn = true;
+
+        /*
+         * Quando riaccendi parte
+         * una nuova sessione.
+         */
+
+        startTime =
+            Date.now();
+
+        localStorage.setItem(
+            "haloStart",
+            startTime
+        );
+
+        localStorage.setItem(
+            "haloDeskOn",
+            "true"
+        );
+
+    }
+
+    updatePowerUI();
+    updateStats();
+
+}
+
+
+/* =========================================================
    CAMBIO STATO
-========================= */
+========================================================= */
 
 function changeState(newState) {
 
-    if (!haloDeskOn) return;
+    if (!haloDeskOn) {
+        return;
+    }
 
-    if (newState === state) return;
+    if (newState === state) {
+        return;
+    }
 
-    var now = Date.now();
+    var now =
+        Date.now();
+
+    var duration =
+        Math.max(
+            0,
+            Math.floor(
+                (now - startTime) / 1000
+            )
+        );
+
 
     sessions.push({
 
@@ -1639,16 +2344,16 @@ function changeState(newState) {
 
         end: now,
 
-        duration:
-            Math.floor(
-                (now - startTime) / 1000
-            )
+        duration: duration
 
     });
 
-    state = newState;
 
-    startTime = now;
+    state =
+        newState;
+
+    startTime =
+        now;
 
 
     localStorage.setItem(
@@ -1668,40 +2373,102 @@ function changeState(newState) {
 
 
     updateColor();
-
+    timerUpdate();
     updateStats();
+
+    playStateSound();
 
 }
 
 
+/* =========================================================
+   AUTOMAZIONI
+========================================================= */
+
 function checkAutomations() {
 
-    if (!haloDeskOn) return;
+    if (!haloDeskOn) {
+        return;
+    }
 
-    var now = new Date();
+    var now =
+        new Date();
 
     var currentTime =
-        String(now.getHours()).padStart(2, "0") +
+        pad(now.getHours()) +
         ":" +
-        String(now.getMinutes()).padStart(2, "0");
+        pad(now.getMinutes());
+
+
+    /*
+     * Evita che la stessa automazione
+     * venga eseguita decine di volte
+     * durante lo stesso minuto.
+     */
+
+    if (
+        lastAutomationMinute ===
+        currentTime
+    ) {
+        return;
+    }
+
+    lastAutomationMinute =
+        currentTime;
+
 
     var automations =
         JSON.parse(
-            localStorage.getItem("haloAutomations") || "[]"
+            localStorage.getItem(
+                "haloAutomations"
+            ) || "[]"
         );
 
-    automations.forEach(function(auto) {
 
-        if (
-            auto.active &&
-            auto.time === currentTime
-        ) {
+    var changed = false;
 
-            changeState(auto.status);
+
+    automations.forEach(
+        function(auto, index) {
+
+            if (
+                auto.active !== false &&
+                auto.time === currentTime
+            ) {
+
+                changeState(
+                    auto.status
+                );
+
+                auto.lastRun =
+                    new Date()
+                        .toISOString();
+
+                auto.lastRunDate =
+                    now
+                        .toISOString()
+                        .slice(0,10);
+
+                changed = true;
+
+            }
 
         }
+    );
 
-    });
+
+    if (changed) {
+
+        localStorage.setItem(
+            "haloAutomations",
+            JSON.stringify(
+                automations
+            )
+        );
+
+        renderAutomations();
+
+    }
 
 }
 
@@ -1712,73 +2479,92 @@ setInterval(
 );
 
 
-/* =========================
-   NAVIGAZIONE
-========================= */
+/* =========================================================
+   NAV
+========================================================= */
 
-function page(id,button) {
+function page(id, button) {
 
-    var pages =
-        document.querySelectorAll(".page");
+    document
+        .querySelectorAll(".page")
+        .forEach(function(p) {
 
-    for (var i=0;i<pages.length;i++) {
+            p.classList.remove(
+                "active"
+            );
 
-        pages[i].classList.remove("active");
+        });
+
+
+    var target =
+        document.getElementById(id);
+
+    if (!target) return;
+
+    target.classList.add(
+        "active"
+    );
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(function(b) {
+
+            b.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
 
     }
-
-
-    document.getElementById(id)
-        .classList.add("active");
-
-
-    var buttons =
-        document.querySelectorAll(".nav button");
-
-    for (var j=0;j<buttons.length;j++) {
-
-        buttons[j].classList.remove("active");
-
-    }
-
-
-    button.classList.add("active");
 
 
     if (id === "stats") {
-
         updateStats();
+    }
 
+    if (id === "automations") {
+        renderAutomations();
+    }
+
+    if (id === "team") {
+        renderTeam();
     }
 
 }
 
 
-/* =========================
+/* =========================================================
    STATISTICHE
-========================= */
-
-var period = "day";
-
+========================================================= */
 
 function setPeriod(p) {
 
     period = p;
 
 
-    var tabs =
-        document.querySelectorAll(".tab");
+    document
+        .querySelectorAll(".tab")
+        .forEach(function(tab) {
 
-    for (var i=0;i<tabs.length;i++) {
+            tab.classList.remove(
+                "active"
+            );
 
-        tabs[i].classList.remove("active");
-
-    }
+        });
 
 
     if (p === "day") {
 
-        document.getElementById("dayTab")
+        document
+            .getElementById("dayTab")
             .classList.add("active");
 
     }
@@ -1786,7 +2572,8 @@ function setPeriod(p) {
 
     if (p === "week") {
 
-        document.getElementById("weekTab")
+        document
+            .getElementById("weekTab")
             .classList.add("active");
 
     }
@@ -1794,7 +2581,8 @@ function setPeriod(p) {
 
     if (p === "month") {
 
-        document.getElementById("monthTab")
+        document
+            .getElementById("monthTab")
             .classList.add("active");
 
     }
@@ -1805,29 +2593,167 @@ function setPeriod(p) {
 }
 
 
-function getStats() {
+/*
+ * Questa è la parte importante:
+ * non sommiamo più tutte le sessioni.
+ *
+ * Ogni sessione viene tagliata sul
+ * periodo selezionato.
+ */
+
+function getPeriodStart() {
+
+    var now =
+        new Date();
+
+    if (period === "day") {
+
+        return startOfDay(now);
+
+    }
+
+    if (period === "week") {
+
+        return startOfWeek(now);
+
+    }
+
+    return startOfMonth(now);
+
+}
+
+
+function calculateStats() {
 
     var data = {
 
-        Libero:0,
-        Occupato:0,
-        Focus:0
+        Libero: 0,
+
+        Occupato: 0,
+
+        Focus: 0
 
     };
 
 
-    for (var i=0;i<sessions.length;i++) {
+    var periodStart =
+        getPeriodStart();
 
-        data[sessions[i].state] +=
-            sessions[i].duration;
+    var periodEnd =
+        Date.now();
+
+
+    sessions.forEach(
+        function(session) {
+
+            var start =
+                Number(
+                    session.start
+                );
+
+            var end =
+                Number(
+                    session.end
+                );
+
+
+            if (
+                !start ||
+                !end
+            ) {
+                return;
+            }
+
+
+            /*
+             * Intersezione tra la sessione
+             * e il periodo richiesto.
+             */
+
+            var clippedStart =
+                Math.max(
+                    start,
+                    periodStart
+                );
+
+            var clippedEnd =
+                Math.min(
+                    end,
+                    periodEnd
+                );
+
+
+            if (
+                clippedEnd >
+                clippedStart
+            ) {
+
+                if (
+                    data[
+                        session.state
+                    ] !== undefined
+                ) {
+
+                    data[
+                        session.state
+                    ] +=
+                        Math.floor(
+                            (
+                                clippedEnd -
+                                clippedStart
+                            ) / 1000
+                        );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Aggiungiamo la sessione
+     * attualmente aperta.
+     */
+
+    if (
+        haloDeskOn &&
+        startTime
+    ) {
+
+        var currentEnd =
+            Date.now();
+
+        var clippedStart =
+            Math.max(
+                startTime,
+                periodStart
+            );
+
+        var clippedEnd =
+            Math.min(
+                currentEnd,
+                periodEnd
+            );
+
+
+        if (
+            clippedEnd >
+            clippedStart
+        ) {
+
+            data[state] +=
+                Math.floor(
+                    (
+                        clippedEnd -
+                        clippedStart
+                    ) / 1000
+                );
+
+        }
 
     }
-
-
-    data[state] +=
-        Math.floor(
-            (Date.now()-startTime)/1000
-        );
 
 
     return data;
@@ -1837,7 +2763,8 @@ function getStats() {
 
 function updateStats() {
 
-    var data = getStats();
+    var data =
+        calculateStats();
 
 
     var total =
@@ -1846,150 +2773,260 @@ function updateStats() {
         data.Focus;
 
 
-    document.getElementById("total")
-        .innerHTML =
-        Math.floor(total/60) + " min";
+    document
+        .getElementById("total")
+        .textContent =
+        formatMinutes(total);
 
 
-    document.getElementById("free")
-        .innerHTML =
-        Math.floor(data.Libero/60) + " min";
+    document
+        .getElementById("free")
+        .textContent =
+        formatMinutes(
+            data.Libero
+        );
 
 
-    document.getElementById("busy")
-        .innerHTML =
-        Math.floor(data.Occupato/60) + " min";
+    document
+        .getElementById("busy")
+        .textContent =
+        formatMinutes(
+            data.Occupato
+        );
 
 
-    document.getElementById("focus")
-        .innerHTML =
-        Math.floor(data.Focus/60) + " min";
+    document
+        .getElementById("focus")
+        .textContent =
+        formatMinutes(
+            data.Focus
+        );
 
 
-    if (total > 0) {
+    var freePercent =
+        total
+            ? data.Libero /
+                total *
+                100
+            : 0;
 
-        document.getElementById("freeBar")
-            .style.width =
-            (data.Libero/total*100)+"%";
+    var busyPercent =
+        total
+            ? data.Occupato /
+                total *
+                100
+            : 0;
+
+    var focusPercent =
+        total
+            ? data.Focus /
+                total *
+                100
+            : 0;
 
 
-        document.getElementById("busyBar")
-            .style.width =
-            (data.Occupato/total*100)+"%";
+    document
+        .getElementById("freeBar")
+        .style.width =
+        freePercent + "%";
 
 
-        document.getElementById("focusBar")
-            .style.width =
-            (data.Focus/total*100)+"%";
+    document
+        .getElementById("busyBar")
+        .style.width =
+        busyPercent + "%";
 
-    }
+
+    document
+        .getElementById("focusBar")
+        .style.width =
+        focusPercent + "%";
 
 
-    var title = "Oggi";
+    var title =
+        "Oggi";
+
 
     if (period === "week") {
 
-        title = "Questa settimana";
+        title =
+            "Questa settimana";
 
     }
+
 
     if (period === "month") {
 
-        title = "Questo mese";
+        title =
+            "Questo mese";
 
     }
 
 
-    document.getElementById("periodCard")
+    document
+        .getElementById("periodCard")
         .innerHTML =
 
         "<div class='card-title'>" +
         title +
         "</div>" +
 
-        "<div class='muted' style='margin-top:10px'>" +
+        "<div class='muted' " +
+        "style='margin-top:12px'>" +
 
         "🟢 Libero: " +
-        Math.floor(data.Libero/60) +
-        " min<br><br>" +
+        formatMinutes(
+            data.Libero
+        ) +
+
+        "<br><br>" +
 
         "🔴 Occupato: " +
-        Math.floor(data.Occupato/60) +
-        " min<br><br>" +
+        formatMinutes(
+            data.Occupato
+        ) +
+
+        "<br><br>" +
 
         "🔵 Focus: " +
-        Math.floor(data.Focus/60) +
-        " min" +
+        formatMinutes(
+            data.Focus
+        ) +
 
         "</div>";
 
 }
 
 
-updateStats();
+/*
+ * Aggiorna le statistiche ogni minuto
+ * anche senza entrare nella pagina.
+ */
+
+setInterval(
+    updateStats,
+    60000
+);
 
 
-/* =========================
-   STUDIO
-========================= */
-
-var studySeconds = 1500;
-
-var studyInterval = null;
-
+/* =========================================================
+   STUDIO / POMODORO
+========================================================= */
 
 function updateStudy() {
 
-    var m =
-        Math.floor(studySeconds/60);
+    var minutes =
+        Math.floor(
+            studySeconds / 60
+        );
 
-    var s =
-        studySeconds%60;
+    var seconds =
+        studySeconds % 60;
 
 
-    document.getElementById("studyTimer")
-        .innerHTML =
-        String(m).padStart(2,"0") +
+    document
+        .getElementById("studyTimer")
+        .textContent =
+        pad(minutes) +
         ":" +
-        String(s).padStart(2,"0");
+        pad(seconds);
+
+
+    document
+        .getElementById("studyMode")
+        .textContent =
+        studyMode;
+
+
+    localStorage.setItem(
+        "studySeconds",
+        studySeconds
+    );
 
 }
 
 
 function startStudy() {
 
-    if (studyInterval) return;
+    if (studyInterval) {
+        return;
+    }
 
 
     studyInterval =
-        setInterval(function() {
+        setInterval(
+            function() {
 
-            if (studySeconds > 0) {
+                if (
+                    studySeconds > 0
+                ) {
 
-                studySeconds--;
+                    studySeconds--;
 
-                updateStudy();
+                    updateStudy();
 
-            } else {
+                } else {
 
-                pauseStudy();
+                    pauseStudy();
 
-                alert(
-                    "Sessione terminata!"
-                );
+                    if (
+                        studyMode ===
+                        "Studio"
+                    ) {
 
-            }
+                        studyMode =
+                            "Pausa";
 
-        },1000);
+                        studySeconds =
+                            300;
+
+                    } else {
+
+                        studyMode =
+                            "Studio";
+
+                        studySeconds =
+                            1500;
+
+                    }
+
+                    updateStudy();
+
+                    playStateSound();
+
+                    if (
+                        notificationsEnabled
+                    ) {
+
+                        alert(
+                            "Fase " +
+                            studyMode +
+                            " iniziata."
+                        );
+
+                    }
+
+                }
+
+            },
+            1000
+        );
 
 }
 
 
 function pauseStudy() {
 
-    clearInterval(studyInterval);
+    if (studyInterval) {
 
-    studyInterval = null;
+        clearInterval(
+            studyInterval
+        );
+
+        studyInterval =
+            null;
+
+    }
 
 }
 
@@ -1998,7 +3035,11 @@ function resetStudy() {
 
     pauseStudy();
 
-    studySeconds = 1500;
+    studyMode =
+        "Studio";
+
+    studySeconds =
+        1500;
 
     updateStudy();
 
@@ -2014,356 +3055,1015 @@ function pomodoro() {
 }
 
 
-updateStudy();
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function applyDarkMode() {
+
+    var enabled =
+        localStorage.getItem(
+            "haloDark"
+        ) === "true";
 
 
-/* =========================
-   DARK
-========================= */
+    if (enabled) {
+
+        document.body
+            .classList.add("dark");
+
+    } else {
+
+        document.body
+            .classList.remove("dark");
+
+    }
+
+}
+
 
 function toggleDark() {
 
-    document.body.classList.toggle("dark");
+    var enabled =
+        document.body
+            .classList.toggle("dark");
+
 
     localStorage.setItem(
         "haloDark",
-        document.body.classList.contains("dark")
+        enabled
     );
 
 }
 
 
-if (
-    localStorage.getItem("haloDark")
-    === "true"
+/* =========================================================
+   NOTIFICHE / SUONI
+========================================================= */
+
+function updateSettingSwitch(
+    id,
+    active
 ) {
 
-    document.body.classList.add("dark");
+    var element =
+        document.getElementById(id);
+
+    if (!element) return;
+
+    if (active) {
+
+        element.classList.add(
+            "active"
+        );
+
+    } else {
+
+        element.classList.remove(
+            "active"
+        );
+
+    }
 
 }
 
 
-/* =========================
-   ALTRE FUNZIONI
-========================= */
+function toggleNotifications() {
+
+    notificationsEnabled =
+        !notificationsEnabled;
+
+    localStorage.setItem(
+        "haloNotifications",
+        notificationsEnabled
+    );
+
+    updateSettingSwitch(
+        "notificationSwitch",
+        notificationsEnabled
+    );
+
+}
+
+
+function toggleSound() {
+
+    soundEnabled =
+        !soundEnabled;
+
+    localStorage.setItem(
+        "haloSound",
+        soundEnabled
+    );
+
+    updateSettingSwitch(
+        "soundSwitch",
+        soundEnabled
+    );
+
+}
+
+
+function playStateSound() {
+
+    if (!soundEnabled) {
+        return;
+    }
+
+
+    try {
+
+        var AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        var context =
+            new AudioContext();
+
+        var oscillator =
+            context.createOscillator();
+
+        var gain =
+            context.createGain();
+
+        oscillator.connect(
+            gain
+        );
+
+        gain.connect(
+            context.destination
+        );
+
+        oscillator.frequency.value =
+            660;
+
+        gain.gain.value =
+            0.05;
+
+        oscillator.start();
+
+        oscillator.stop(
+            context.currentTime +
+            .08
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Audio non disponibile"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ALTRO
+========================================================= */
 
 function openFeature(name) {
 
-    if (name === "Automazioni") {
+    if (
+        name ===
+        "Automazioni"
+    ) {
 
-        document.querySelectorAll(".page").forEach(function(p) {
-            p.classList.remove("active");
-        });
+        document
+            .querySelectorAll(".page")
+            .forEach(function(p) {
 
-        document.getElementById("automations")
-            .classList.add("active");
+                p.classList.remove(
+                    "active"
+                );
+
+            });
+
+        document
+            .getElementById(
+                "automations"
+            )
+            .classList.add(
+                "active"
+            );
+
+        renderAutomations();
+
+        return;
 
     }
 
-    if (name === "Calendario") {
 
-        alert("Calendario: prossimamente");
+    if (
+        name ===
+        "Calendario"
+    ) {
+
+        alert(
+            "Calendario pronto per essere collegato."
+        );
+
+        return;
 
     }
 
-    if (name === "Notifiche") {
 
-        alert("Notifiche: prossimamente");
+    if (
+        name ===
+        "Notifiche"
+    ) {
+
+        alert(
+            notificationsEnabled
+                ? "Notifiche attive."
+                : "Notifiche disattivate."
+        );
+
+        return;
 
     }
 
-    if (name === "Personalizzazione") {
 
-        alert("Personalizzazione: prossimamente");
+    if (
+        name ===
+        "Personalizzazione"
+    ) {
+
+        alert(
+            "La personalizzazione verrà collegata alle impostazioni del dispositivo."
+        );
+
+        return;
 
     }
 
 }
+
+
+/* =========================================================
+   TEAM
+========================================================= */
+
+function addMember() {
+
+    var input =
+        document.getElementById(
+            "memberName"
+        );
+
+    var name =
+        input.value.trim();
+
+
+    if (!name) {
+
+        alert(
+            "Inserisci il nome del partecipante."
+        );
+
+        return;
+
+    }
+
+
+    var members =
+        JSON.parse(
+            localStorage.getItem(
+                "haloTeam"
+            ) || "[]"
+        );
+
+
+    members.push({
+
+        name: name,
+
+        role: "Partecipante",
+
+        created:
+            Date.now()
+
+    });
+
+
+    localStorage.setItem(
+        "haloTeam",
+        JSON.stringify(
+            members
+        )
+    );
+
+
+    input.value = "";
+
+    renderTeam();
+
+}
+
+
+function renderTeam() {
+
+    var list =
+        document.getElementById(
+            "teamList"
+        );
+
+    var members =
+        JSON.parse(
+            localStorage.getItem(
+                "haloTeam"
+            ) || "[]"
+        );
+
+
+    var old =
+        list.querySelectorAll(
+            ".team-member"
+        );
+
+
+    old.forEach(
+        function(item) {
+
+            item.remove();
+
+        }
+    );
+
+
+    var empty =
+        document.getElementById(
+            "noMembers"
+        );
+
+
+    if (
+        members.length === 0
+    ) {
+
+        empty.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    empty.style.display =
+        "none";
+
+
+    members.forEach(
+        function(member,index) {
+
+            var item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "team-member";
+
+
+            item.innerHTML =
+
+                "<div>" +
+
+                "<div class='member-name'>" +
+                escapeHtml(
+                    member.name
+                ) +
+                "</div>" +
+
+                "<div class='member-role'>" +
+                escapeHtml(
+                    member.role
+                ) +
+                "</div>" +
+
+                "</div>" +
+
+                "<button " +
+                "class='small-button delete-button' " +
+                "onclick='deleteMember(" +
+                index +
+                ")'>" +
+
+                "Elimina" +
+
+                "</button>";
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+function deleteMember(index) {
+
+    var members =
+        JSON.parse(
+            localStorage.getItem(
+                "haloTeam"
+            ) || "[]"
+        );
+
+
+    members.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "haloTeam",
+        JSON.stringify(
+            members
+        )
+    );
+
+
+    renderTeam();
+
+}
+
 
 function teamFeature(name) {
 
-    alert(
-        "Team: " +
-        name +
-        "\n\nQuesta funzione verrà collegata ai dispositivi Halo Desk."
-    );
+    if (
+        name ===
+        "turni"
+    ) {
 
-}
+        alert(
+            "La funzione Turni è pronta per essere collegata al tuo Team."
+        );
 
-
-/* =========================
-   DISPOSITIVO
-========================= */
-
-function openDevice() {
-
-    document.getElementById("modal")
-        .classList.add("show");
-
-}
-
-
-function closeDevice() {
-
-    document.getElementById("modal")
-        .classList.remove("show");
-
-}
-
-function saveDevice() {
-
-    var name =
-        document.getElementById("deviceName")
-        .value;
-
-    if (!name) {
-        name = "Halo Desk";
     }
 
-    localStorage.setItem(
-        "haloDevice",
-        name
-    );
-
-    closeDevice();
-
-    alert(
-        name + " aggiunto!"
-    );
-
 }
 
 
-/* AUTOMAZIONI */
+/* =========================================================
+   AUTOMAZIONI - CREAZIONE
+========================================================= */
+
 function createAutomation() {
 
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
+
+            page.classList.remove(
+                "active"
+            );
+
+        });
+
 
     document
-        .getElementById("createAutomationPage")
-        .classList.add("active");
+        .getElementById(
+            "createAutomationPage"
+        )
+        .classList.add(
+            "active"
+        );
 
 }
-var selectedAutomationState = "";
 
-function selectAutomationState(state) {
 
-    selectedAutomationState = state;
+function closeAutomationPage() {
 
-    document.getElementById("autoFree")
-        .classList.remove("selected");
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
 
-    document.getElementById("autoBusy")
-        .classList.remove("selected");
+            page.classList.remove(
+                "active"
+            );
 
-    document.getElementById("autoFocus")
-        .classList.remove("selected");
+        });
 
-    if (state === "Libero") {
-        document.getElementById("autoFree")
-            .classList.add("selected");
-    }
 
-    if (state === "Occupato") {
-        document.getElementById("autoBusy")
-            .classList.add("selected");
-    }
+    document
+        .getElementById(
+            "automations"
+        )
+        .classList.add(
+            "active"
+        );
 
-    if (state === "Focus") {
-        document.getElementById("autoFocus")
-            .classList.add("selected");
-    }
 
-    document.getElementById("selectedAutomationState")
-        .textContent = "Stato selezionato: " + state;
+    resetAutomationForm();
+
+    renderAutomations();
+
 }
-    function saveAutomation() {
+
+
+function selectAutomationState(
+    selectedState
+) {
+
+    selectedAutomationState =
+        selectedState;
+
+
+    document
+        .getElementById("autoFree")
+        .classList.remove(
+            "selected"
+        );
+
+    document
+        .getElementById("autoBusy")
+        .classList.remove(
+            "selected"
+        );
+
+    document
+        .getElementById("autoFocus")
+        .classList.remove(
+            "selected"
+        );
+
+
+    if (
+        selectedState ===
+        "Libero"
+    ) {
+
+        document
+            .getElementById("autoFree")
+            .classList.add(
+                "selected"
+            );
+
+    }
+
+
+    if (
+        selectedState ===
+        "Occupato"
+    ) {
+
+        document
+            .getElementById("autoBusy")
+            .classList.add(
+                "selected"
+            );
+
+    }
+
+
+    if (
+        selectedState ===
+        "Focus"
+    ) {
+
+        document
+            .getElementById("autoFocus")
+            .classList.add(
+                "selected"
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "selectedAutomationState"
+        )
+        .textContent =
+        "Stato selezionato: " +
+        selectedState;
+
+}
+
+
+function saveAutomation() {
 
     var name =
-        document.getElementById("automationName").value.trim();
+        document
+            .getElementById(
+                "automationName"
+            )
+            .value
+            .trim();
+
 
     var time =
-        document.getElementById("automationTime").value;
+        document
+            .getElementById(
+                "automationTime"
+            )
+            .value;
+
 
     var errorName =
-        document.getElementById("automationNameError");
+        document
+            .getElementById(
+                "automationNameError"
+            );
+
 
     var errorTime =
-        document.getElementById("automationTimeError");
+        document
+            .getElementById(
+                "automationTimeError"
+            );
+
 
     var errorState =
-        document.getElementById("automationStateError");
+        document
+            .getElementById(
+                "automationStateError"
+            );
 
-    errorName.textContent = "";
-    errorTime.textContent = "";
-    errorState.textContent = "";
 
-    var valid = true;
+    errorName.textContent =
+        "";
+
+    errorTime.textContent =
+        "";
+
+    errorState.textContent =
+        "";
+
+
+    var valid =
+        true;
+
 
     if (!name) {
-        errorName.textContent = "Inserisci un nome";
-        valid = false;
+
+        errorName.textContent =
+            "Inserisci un nome";
+
+        valid =
+            false;
+
     }
+
 
     if (!time) {
-        errorTime.textContent = "Seleziona un orario";
-        valid = false;
+
+        errorTime.textContent =
+            "Seleziona un orario";
+
+        valid =
+            false;
+
     }
 
+
     if (!selectedAutomationState) {
-        errorState.textContent = "Seleziona uno stato";
-        valid = false;
+
+        errorState.textContent =
+            "Seleziona uno stato";
+
+        valid =
+            false;
+
     }
+
 
     if (!valid) {
         return;
     }
 
+
     var automations =
         JSON.parse(
-            localStorage.getItem("haloAutomations") || "[]"
+            localStorage.getItem(
+                "haloAutomations"
+            ) || "[]"
         );
 
+
     automations.push({
-        name: name,
-        time: time,
-        status: selectedAutomationState,
-        active: true
+
+        id:
+            Date.now(),
+
+        name:
+            name,
+
+        time:
+            time,
+
+        status:
+            selectedAutomationState,
+
+        active:
+            true,
+
+        lastRun:
+            null,
+
+        lastRunDate:
+            null
+
     });
-localStorage.setItem(
-    "haloAutomations",
-    JSON.stringify(automations)
-);
 
-renderAutomations();
 
-document.querySelectorAll(".page").forEach(function(page) {
-    page.classList.remove("active");
-});
+    localStorage.setItem(
+        "haloAutomations",
+        JSON.stringify(
+            automations
+        )
+    );
 
-document
-    .getElementById("automations")
-    .classList.add("active");
+
+    resetAutomationForm();
+
+    renderAutomations();
+
+
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
+
+            page.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .getElementById(
+            "automations"
+        )
+        .classList.add(
+            "active"
+        );
 
 }
 
 
-var haloDeskOn = true;
+function resetAutomationForm() {
 
-function toggleHaloDesk() {
+    var name =
+        document.getElementById(
+            "automationName"
+        );
 
-    haloDeskOn = !haloDeskOn;
-
-    var button =
-        document.getElementById("powerToggle");
-
-    var ring =
-        document.getElementById("timerRing");
-
-    var timerLabel =
-        document.querySelector(".timer-label");
-
-    var status =
-        document.getElementById("status");
+    var time =
+        document.getElementById(
+            "automationTime"
+        );
 
 
-    if (haloDeskOn) {
+    if (name) {
+        name.value = "";
+    }
 
-        button.classList.remove("off");
-        button.classList.add("on");
+    if (time) {
+        time.value = "";
+    }
 
-        ring.classList.remove("desk-off");
 
-        timerLabel.textContent = "STATO ATTUALE";
+    selectedAutomationState =
+        "";
 
-        status.textContent = "🟢 Libero";
 
-        startTime = Date.now();
+    [
+        "autoFree",
+        "autoBusy",
+        "autoFocus"
+    ].forEach(
+        function(id) {
 
-        timerUpdate();
+            var element =
+                document.getElementById(id);
 
-    } else {
+            if (element) {
 
-        button.classList.remove("on");
-        button.classList.add("off");
+                element.classList.remove(
+                    "selected"
+                );
 
-        ring.classList.add("desk-off");
+            }
 
-        timerLabel.textContent = "SPENTO";
+        }
+    );
 
-        status.textContent = "⚪ Spento";
+
+    var selected =
+        document.getElementById(
+            "selectedAutomationState"
+        );
+
+    if (selected) {
+
+        selected.textContent =
+            "Nessuno stato selezionato";
 
     }
 
 }
 
+
+/* =========================================================
+   AUTOMAZIONI - LISTA
+========================================================= */
+
 function renderAutomations() {
-    var list = document.getElementById("automationList");
+
+    var list =
+        document.getElementById(
+            "automationList"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
 
     var automations =
         JSON.parse(
-            localStorage.getItem("haloAutomations") || "[]"
+            localStorage.getItem(
+                "haloAutomations"
+            ) || "[]"
         );
 
-    var oldItems =
-        list.querySelectorAll(".automation-item");
 
-    oldItems.forEach(function(item) {
-        item.remove();
-    });
+    list
+        .querySelectorAll(
+            ".automation-item"
+        )
+        .forEach(
+            function(item) {
 
-    var noAutomations =
-        document.getElementById("noAutomations");
+                item.remove();
 
-    if (automations.length === 0) {
+            }
+        );
 
-        noAutomations.style.display = "block";
+
+    var empty =
+        document.getElementById(
+            "noAutomations"
+        );
+
+
+    if (
+        automations.length === 0
+    ) {
+
+        empty.style.display =
+            "block";
+
         return;
 
     }
 
-    noAutomations.style.display = "none";
 
-    automations.forEach(function(auto, index) {
+    empty.style.display =
+        "none";
 
-        var item =
-            document.createElement("div");
 
-        item.className = "automation-item";
+    automations.forEach(
+        function(auto,index) {
 
-        item.style.marginTop = "14px";
-        item.style.padding = "16px";
-        item.style.borderRadius = "18px";
-        item.style.background = "#F5F7FA";
+            var item =
+                document.createElement(
+                    "div"
+                );
 
-        item.innerHTML =
-            "<strong>" +
-            auto.name +
-            "</strong>" +
 
-            "<div style='margin-top:6px;'>" +
-            auto.time +
-            " · " +
-            auto.status +
-            "</div>" +
+            item.className =
+                "automation-item";
 
-            "<button " +
-            "onclick=\"deleteAutomation(" + index + ")\" " +
-            "style=\"margin-top:12px;" +
-            "background:#E5E7EB;" +
-            "color:#344054;" +
-            "border:none;" +
-            "border-radius:20px;" +
-            "padding:9px 16px;" +
-            "font-weight:600;\">" +
-            "Elimina" +
-            "</button>";
 
-        list.appendChild(item);
+            var stateIcon =
+                auto.status ===
+                "Libero"
+                    ? "🟢"
+                    : auto.status ===
+                      "Occupato"
+                        ? "🔴"
+                        : "🔵";
 
-    });
+
+            var activeText =
+                auto.active === false
+                    ? "Disattivata"
+                    : "Attiva";
+
+
+            item.innerHTML =
+
+                "<div class='automation-top'>" +
+
+                "<div>" +
+
+                "<div class='automation-name'>" +
+                escapeHtml(
+                    auto.name
+                ) +
+                "</div>" +
+
+                "<div class='automation-time'>" +
+                "⏰ " +
+                escapeHtml(
+                    auto.time
+                ) +
+                " · " +
+                stateIcon +
+                " " +
+                escapeHtml(
+                    auto.status
+                ) +
+                "</div>" +
+
+                "</div>" +
+
+                "<b>" +
+                activeText +
+                "</b>" +
+
+                "</div>" +
+
+
+                "<div class='automation-actions'>" +
+
+                "<button " +
+                "class='small-button toggle-automation' " +
+                "onclick='toggleAutomation(" +
+                index +
+                ")'>" +
+
+                (
+                    auto.active === false
+                        ? "Attiva"
+                        : "Disattiva"
+                ) +
+
+                "</button>" +
+
+
+                "<button " +
+                "class='small-button delete-button' " +
+                "onclick='deleteAutomation(" +
+                index +
+                ")'>" +
+
+                "Elimina" +
+
+                "</button>" +
+
+                "</div>";
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+function toggleAutomation(index) {
+
+    var automations =
+        JSON.parse(
+            localStorage.getItem(
+                "haloAutomations"
+            ) || "[]"
+        );
+
+
+    if (
+        !automations[index]
+    ) {
+        return;
+    }
+
+
+    automations[index].active =
+        automations[index].active ===
+        false;
+
+
+    localStorage.setItem(
+        "haloAutomations",
+        JSON.stringify(
+            automations
+        )
+    );
+
+
+    renderAutomations();
 
 }
 
@@ -2372,19 +4072,319 @@ function deleteAutomation(index) {
 
     var automations =
         JSON.parse(
-            localStorage.getItem("haloAutomations") || "[]"
+            localStorage.getItem(
+                "haloAutomations"
+            ) || "[]"
         );
 
-    automations.splice(index, 1);
+
+    if (
+        !automations[index]
+    ) {
+        return;
+    }
+
+
+    if (
+        !confirm(
+            "Vuoi eliminare questa automazione?"
+        )
+    ) {
+        return;
+    }
+
+
+    automations.splice(
+        index,
+        1
+    );
+
 
     localStorage.setItem(
         "haloAutomations",
-        JSON.stringify(automations)
+        JSON.stringify(
+            automations
+        )
     );
+
 
     renderAutomations();
 
 }
+
+
+/* =========================================================
+   DEVICE
+========================================================= */
+
+function openDevice() {
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function closeDevice() {
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+function saveDevice() {
+
+    var name =
+        document
+            .getElementById(
+                "deviceName"
+            )
+            .value
+            .trim();
+
+
+    var code =
+        document
+            .getElementById(
+                "deviceCode"
+            )
+            .value
+            .trim();
+
+
+    if (!name) {
+
+        name =
+            "Halo Desk";
+
+    }
+
+
+    var device = {
+
+        name:
+            name,
+
+        code:
+            code,
+
+        created:
+            Date.now()
+
+    };
+
+
+    localStorage.setItem(
+        "haloDevice",
+        JSON.stringify(
+            device
+        )
+    );
+
+
+    document
+        .getElementById(
+            "deviceName"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "deviceCode"
+        )
+        .value = "";
+
+
+    closeDevice();
+
+    updateDeviceUI();
+
+}
+
+
+function updateDeviceUI() {
+
+    var raw =
+        localStorage.getItem(
+            "haloDevice"
+        );
+
+
+    var name =
+        document.getElementById(
+            "deviceHomeName"
+        );
+
+
+    if (!raw) {
+
+        name.textContent =
+            "Nessun dispositivo configurato";
+
+        return;
+
+    }
+
+
+    try {
+
+        var device =
+            JSON.parse(raw);
+
+        name.textContent =
+            device.name;
+
+    } catch(error) {
+
+        name.textContent =
+            "Halo Desk";
+
+    }
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetAllData() {
+
+    var confirmed =
+        confirm(
+            "Sei sicuro? Verranno cancellati statistiche, automazioni, team e impostazioni."
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    localStorage.clear();
+
+
+    alert(
+        "Dati cancellati. L'app verrà ricaricata."
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   INIZIALIZZAZIONE
+========================================================= */
+
+function initializeApp() {
+
+    applyDarkMode();
+
+    updatePowerUI();
+
+    updateColor();
+
+    timerUpdate();
+
+    updateStats();
+
+    updateStudy();
+
+    renderAutomations();
+
+    renderTeam();
+
+    updateDeviceUI();
+
+    updateSettingSwitch(
+        "notificationSwitch",
+        notificationsEnabled
+    );
+
+    updateSettingSwitch(
+        "soundSwitch",
+        soundEnabled
+    );
+
+    checkAutomations();
+
+}
+
+
+initializeApp();
+
+
+/*
+ * Controlliamo le automazioni anche quando
+ * la pagina torna visibile dopo essere stata
+ * lasciata in background.
+ */
+
+document.addEventListener(
+    "visibilitychange",
+    function() {
+
+        if (
+            !document.hidden
+        ) {
+
+            checkAutomations();
+
+            timerUpdate();
+
+            updateStats();
+
+        }
+
+    }
+);
+
+
 </script>
 
 </body>
