@@ -3734,6 +3734,21 @@ if (!haloDeskOn) {
 }
 
 </script>
+<!-- tutto il tuo codice Halo Desk -->
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+            .then(() => {
+                console.log("Halo Desk: Service Worker attivo");
+            })
+            .catch(error => {
+                console.error("Halo Desk: errore Service Worker", error);
+            });
+    });
+}
+</script>
 
 </body>
 </html>
